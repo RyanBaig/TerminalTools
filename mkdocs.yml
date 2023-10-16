@@ -1,9 +1,28 @@
 site_name: TerminalTools Official Documentation
+
 theme:
   name: material
   features:
     - toc
-  
+    - search.suggest
+    - search.highlight
+    - search.share
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
   extra:
-    link: https://example.com
-    repo_url: https://github.com/username/repo
+    link: https://github.com/RyanBaig/TerminalTools
+    repo_url: https://github.com/RyanBaig/TerminalTools
+
+
