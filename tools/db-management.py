@@ -12,8 +12,7 @@ cmd = input(
         - Display Contents of a Database (4)
         
         
-        
-        -- Suggest More at: I'll add this later with a link to my github issues page bc this is not yet on github repos.
+        -- Suggest More at: https://github.com/RyanBaig/TerminalTools/issues/new?labels=Function%20Request&title=Function%20Request%20For%20DB%20Management%20Module
         
         Now, type the number of the command you want to run: 
       """
