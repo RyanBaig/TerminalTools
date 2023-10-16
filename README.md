@@ -14,31 +14,71 @@ View it's documentation [here.](https://terminaltools-docs.ryanbaig.vercel.app)
 - Designed for developers and users.
 
 ## Installation
-#### Development
+### Development
+#### For Editing Documentation:
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/RyanBaig/TerminalTools.git
-   ```
+```bash
+git clone https://github.com/RyanBaig/TerminalTools.git
+```
 
 2. Navigate to the repository folder:
- ```bash
-   cd TerminalTools
+```bash
+cd TerminalTools
+```
+
+3. Install any necessary dependencies:
+```bash
+pip install -r requirements.txt
    ```
 
-- If you want to edit the documentation, Install any necessary dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-1. After the dependencies are installed, run `mkdocs serve` in the terminal to create a development server for the documentation. Anything you need to edit about the documentation can be found in the `docs` folder. If you need to edit the settings, you will need to edit `mkdocs.yml` if you need to edit the text, go to the page/module you are looking for and start editing. For example, if you need to edit the text of main page, you would look for `index.md` and if the overview page of the modules sections, you would go to `modules` directory (which contains all the modules-related pages) and edit in `index.md`.
+4. after installing dependencies, run this command:
+```bash
+mkdocs serve
+```
+This will launch a development server at `https://locahost:8000` to review how the documentation looks as you edit the code.
+5. Documentation Files Structure:
+```
+docs/
+│
+├── index.md (The Main Page (https://terminaltools-docs.ryanbaig.vercel.app))
+│
+├── assets/
+│   ├── icon.svg
+│   ├── icon.ico
+│
+├── modules/
+│   ├── index.md (The Overview Page of the Modules Section (https://terminaltools-docs.ryanbaig.vercel.app/modules))
+│
+│   ├── database-management.md (The Database Module Page of the Modules Section (https://terminaltools-docs.ryanbaig.vercel.app/modules/database-management/))
+│
+│   ├── file-management.md (The Database Module Page of the Modules Section (https://terminaltools-docs.ryanbaig.vercel.app/modules/file-management/))
+```
 
-- If you do not want to edit the documentation, there are no packages to install. Contribute your share by adding features/other stuff and submit a pull request.
+#### For Not Editing Documentation:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/RyanBaig/TerminalTools.git
+```
+
+2. Navigate to the repository folder:
+```bash
+cd TerminalTools
+```
+
+3. Contribute your share by adding features/other stuff and submit a pull request.
   
-#### For Usage
-1. Download the installer from [here.](installer.exe)
+### For Users
+1. Download the installer from [here.](https://github.com/RyanBaig/TerminalTools/raw/master/installer.exe)
+   
 2. Run it as administrator.
+   
 3. Click on the **Install** button and wait.
+   
 4. The Terminal Tools will be the successfully installed. If there are any error, open an [Issue.](https://github.com/RyanBaig/TerminalTools/issues/new)
+   
 5. View the documentation for the modules [here.](https://terminaltools-docs.ryanbaig.vercel.app)
+   
 6. Now, to use them, (Leaving this blank since it is not yet implemented.)
 ## Usage
 
