@@ -1,0 +1,9 @@
+site_name: TerminalTools Official Documentation
+theme:
+  name: material
+  features:
+    - toc
+  
+  extra:
+    link: https://example.com
+    repo_url: https://github.com/username/repo

@@ -1,12 +1,16 @@
-from sys import argv as arg
+import sys
 import os
+
+
+# Define the hyperlink URL
+url = "https://github.com/RyanBaig"
 
 # Define Help MSG
 def help():
-    print("""
+    print(f"""
           
  _____                   _             _            _____           _        _             ______                  
-|_   _|                 (_)           | |          |_   _|         | |      | |            | ___ \                 
+|_   _|                 (_)           | |          |_   _|         | |      | |            | ___ \               
   | | ___ _ __ _ __ ___  _ _ __   __ _| |  ______    | | ___   ___ | |___   | |__  _   _   | |_/ /   _  __ _ _ __  
   | |/ _ \ '__| '_ ` _ \| | '_ \ / _` | | |______|   | |/ _ \ / _ \| / __|  | '_ \| | | |  |    / | | |/ _` | '_ \ 
   | |  __/ |  | | | | | | | | | | (_| | |            | | (_) | (_) | \__ \  | |_) | |_| |  | |\ \ |_| | (_| | | | |
@@ -17,7 +21,7 @@ def help():
                                 Welcome to Terminal Tools By Ryan!
                         Thank you for using my project! I hope you like it.
                         
-I recommend you check out the documentation for each module before using it.
+I recommend you check out the Documentation ({url}) for each module before using it.
 Here are the commands:
 
 - help
@@ -33,12 +37,16 @@ Here are the commands:
 
 
 
-help_msgs = ["help", "--help", "-h", "-help", "--h", "h"]
-if arg in help_msgs:
-    help()
-elif arg == "filemanagement":
-    os.system("python tools/file-management.py")
-elif arg == "dbmanagement":
-    os.system("python tools/db-management.py")
+if len(sys.argv) < 2:
+    print("Usage: python your_script.py <command>")
 else:
-    print("Unknown Command!")
+    command = sys.argv[1]
+
+    if command == "help":
+        help()
+    elif command == "filemanagement":
+        os.system("python tools/file-management.py")
+    elif command == "dbmanagement":
+        os.system("python tools/db-management.py")
+    else:
+        print("Invalid command. Available commands: help, filemanagement, dbmanagement")
