@@ -1,12 +1,33 @@
 site_name: TerminalTools Official Documentation
 
 theme:
+  plugins:
+    - privacy
+    - optimize
+    - offline
+    - search
+    - social
+    - typeset
+  favicon: assets/icon.svg
+  icon:
+    repo: material/github
+  logo: assets/icon.svg
   name: material
   features:
     - toc
     - search.suggest
     - search.highlight
     - search.share
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.path
+    - navigation.indexes
+    - toc.follow
+    - navigation.indexes
+    - content.code.copy
+    - content.tooltips
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -21,8 +42,36 @@ theme:
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode
-  extra:
-    link: https://github.com/RyanBaig/TerminalTools
-    repo_url: https://github.com/RyanBaig/TerminalTools
 
+repo_url: https://github.com/RyanBaig/TerminalTools
+repo_name: RyanBaig/TerminalTools
+nav:
+  - Home: index.md
+  - Modules:
+    - modules/index.md
+    - modules/filemanagement.md
+    - modules/dbmanagement.md
 
+extra:
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics: 
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >- 
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="..." target="_blank" rel="noopener">feedback form</a>.

@@ -1,75 +1,16 @@
 # Introduction
 
-Welcome to Terminal Tools, a command-line utility for efficient file and database management. This documentation provides an overview of the available functions and usage instructions. Let's get started!
 
-## Modules
-All functions are classified into **Modules**. These are small parts of the program that perform a specific task. The following are the currently available modules:
 
-- File Management Module
-  
-- Database Management Module
+# Terminal Tools Documentation
 
-<p>You can suggest more Modules by creating an issue on the Github Repository's <a href="https://github.com/RyanBaig/TerminalTools/issues/new?labels=Module%20Request&title=Module%20Request%20" target="_blank">Issue Tracker</a>.</p>
 
-<p>You can also suggest more Functions by creating an issue on the Github Repository's <a href="https://github.com/RyanBaig/TerminalTools/issues/new?labels=Function%20Request&title=Function%20Request%20" target="_blank">Issue Tracker</a>.</p>
+**_Welcome_** to **Terminal Tools**, an incredibly versatile and powerful **_command-line utility_** meticulously designed to simplify and streamline file and database management tasks. This comprehensive documentation serves as your gateway to an array of functions, each tailored to serve distinct needs. From efficiently navigating directories to interacting with SQLite databases, Terminal Tools is your all-in-one solution, designed to boost productivity and simplify complex tasks.
 
-### File Management Module
+In this documentation, you will find detailed explanations and usage instructions for every available function, ensuring you harness the full potential of this remarkable tool. Each module provides a wealth of capabilities to help you achieve your objectives with utmost ease. 
 
-The File Management Module allows you to interact with files and directories. It provides the following functions:
+Whether you're a seasoned developer seeking an efficient way to manage your databases or someone looking for a robust file management solution, Terminal Tools has you covered. Our commitment to excellence means that you can trust Terminal Tools to empower your workflow and elevate your efficiency. 
 
-#### 1. List Files and Directories
-
-- `Description`: Lists all files and directories in the specified directory.
-  
-- `Usage`: Input the directory path when prompted.
-
-#### 2. Create Directory
-
-- `Description`: Creates a new directory with the given name.
-- `Usage`: Input the directory name or path to its destination when prompted.
-
-#### 3. Delete File or Directory
-
-- `Description`: Deletes a file or directory specified by the path.
-- `Usage`: Input the file or directory path when prompted.
-
-#### 4. Move (Rename) File or Directory
-
-- `Description`: Moves (renames) a file or directory from the source path to the destination path.
-- `Usage`: Input the source and destination paths when prompted.
-
-#### 5. Copy File or Directory
-
-- `Description`: Copies a file or directory from the source to the destination.
-- `Usage`: Input the source and destination paths when prompted.
-
-#### 6. Search Files and Directories
-
-- `Description`: Searches for files and directories in the specified directory based on a matching criteria.
-- `Usage`: Input the directory path and search criteria when prompted.
-
-### Database Management Module
-
-The Database Management Module enables you to work with SQLite databases. It provides the following functions:
-
-#### 7. SQL Query
-
-- `Description`: Opens a text file for editing SQL queries, executes the query on the specified database, and displays the results.
-- `Usage`: Input the database path when prompted.
-
-#### 8. Create Database
-
-- `Description`: Creates a new SQLite database and a table within it with the specified columns.
-- `Usage`: Input the database path, table name, and column names when prompted.
-
-#### 9. Display Database
-
-- `Description`: Retrieves and displays the data from a specified table in the database.
-- `Usage`: Input the database path and table name when prompted.
-
-#### 10. Create Table
-
-- `Description`: Creates a new table in an existing database with the specified columns.
-- `Usage`: Input the database path, table name, and column names when prompted.
+Let's dive into the world of Terminal Tools and unleash its full potential. Explore the dedicated modules for in-depth insights and be prepared to supercharge your command-line experience.
 
 
