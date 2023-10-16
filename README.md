@@ -36,6 +36,7 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 This will launch a development server at `https://locahost:8000` to review how the documentation looks as you edit the code.
+
 5. Documentation Files Structure:
 ```
 docs/
@@ -75,7 +76,7 @@ cd TerminalTools
    
 3. Click on the **Install** button and wait.
    
-4. The Terminal Tools will be the successfully installed. If there are any error, open an [Issue.](https://github.com/RyanBaig/TerminalTools/issues/new)
+4. The Terminal Tools will be the successfully installed. If there are any errors, open an [Issue.](https://github.com/RyanBaig/TerminalTools/issues/new)
    
 5. View the documentation for the modules [here.](https://terminaltools-docs.ryanbaig.vercel.app)
    
