@@ -4,7 +4,7 @@ A collection of Python terminal tools to assist developers and users with variou
 
 Terminal Tools is a Python project that aims to provide a set of command-line utilities to assist developers and users in various tasks. It offers functionalities such as file management, database management, and more.
 
-View it's documentation [here.]()
+View it's documentation [here.](https://terminaltools-docs.ryanbaig.vercel.app)
 
 ## Features
 
