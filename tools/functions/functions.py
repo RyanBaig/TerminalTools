@@ -11,6 +11,8 @@ from prettytable import PrettyTable
 # WebScraping imports
 from bs4 import BeautifulSoup
 import requests
+import datetime
+from datetime import date
 
 
 class Functions:
@@ -52,7 +54,7 @@ class Functions:
         @staticmethod
         def move(source, destination):
             try:
-                os.rename(source, destination)
+                shutil.move(source, destination)
                 print(f"'{source}' has been moved or renamed to '{destination}'.")
             except Exception as e:
                 print(f"An error occurred: {str(e)}")
@@ -64,7 +66,7 @@ class Functions:
                 if os.path.isdir(path):
                     # Rename a directory by changing its name
                     os.rename(path, new_name)
-                    print(f"Renamed directory to '{new_path}'")
+                    print(f"Renamed directory to '{path}'")
                 elif os.path.isfile(path):
                     # Rename a file by changing its name
 
@@ -113,8 +115,8 @@ class Functions:
     class DBManagement:
         @staticmethod
         def sql_query(db):
-            query_file = os.path.abspath("misc/query.sql")
-
+            query_file = os.path.abspath("tools/functions/query.sql")
+            print("Query File Path: " + query_file)
             if os.path.exists(db):
                 try:
                     # Open the notepad
@@ -152,34 +154,34 @@ class Functions:
 
         @staticmethod
         def create_database(db_name, table_name, columns):
-            if os.path.exists(db_name):
-                try:
-                    # Establish a connection to the database or create a new one if it doesn't exist
-                    conn = sqlite3.connect(db_name)
-                    cursor = conn.cursor()
+            db_folder, db_file = os.path.split(db_name)
+            
+            if not os.path.exists(db_folder):
+                os.makedirs(db_folder)
+            
+            try:
+                # Establish a connection to the database or create a new one if it doesn't exist
+                conn = sqlite3.connect(db_name)
+                cursor = conn.cursor()
 
-                    # Create the table with specified columns
-                    query = f"CREATE TABLE IF NOT EXISTS {table_name} ({', '.join(columns)})"
-                    cursor.execute(query)
+                # Create the table with specified columns
+                query = f"CREATE TABLE IF NOT EXISTS {table_name} ({', '.join(columns)})"
+                cursor.execute(query)
 
-                    # Commit the changes
-                    conn.commit()
+                # Commit the changes
+                conn.commit()
 
-                    # Close the connection
-                    conn.close()
+                # Close the connection
+                conn.close()
 
-                    print(
-                        f"Database '{db_name}' and table '{table_name}' created successfully with columns: {', '.join(columns)}"
-                    )
-
-                except sqlite3.Error as e:
-                    print(f"SQLite error: {e}")
-                except Exception as e:
-                    print(f"An error occurred: {e}")
-            else:
                 print(
-                    f"Error: The database file '{db_name}' doesn't exist or the file path is incorrect."
+                    f"Database '{db_name}' and table '{table_name}' created successfully with columns: {', '.join(columns)}"
                 )
+
+            except sqlite3.Error as e:
+                print(f"SQLite error: {e}")
+            except Exception as e:
+                print(f"An error occurred: {e}")
 
         @staticmethod
         def display_db(db, table):
@@ -239,21 +241,21 @@ class Functions:
 
     class WebScraping:
         @staticmethod
-        def fetch_page_content(url):
+        def fetch_page_content(url: str):
             try:
                 if not url.startswith("https://"):
                     better_url = "https://" + url
+                    print(f"Fetching URL: {better_url}")
                 else:
                     better_url = url
-                user = os.path.expanduser("~")
-                username = user.replace("C:\\Users", "")
-                enddir = os.path.join([username, "Desktop", "WebsiteContent"])
+                username = os.path.expanduser("~")
+                enddir = os.path.join(username, "Desktop", "WebsiteContent")
                 if not os.path.exists(enddir):
                     os.makedirs(enddir)
                 response = requests.get(better_url)
                 if response.status_code == 200:
                     html = response.text
-                    with open(f"{enddir}/{better_url}.html", "w") as file:
+                    with open(f"{enddir}/Page_Content_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S') }.html", "w") as file:
                         file.write(html)
                     print(
                         f"""
@@ -266,7 +268,7 @@ class Functions:
                           {html}
                           
                           
-                          The Content Has Also Been Saved to {enddir}/{url}.html
+                          The Content Has Also Been Saved to {enddir}/Page_Content_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S') }.html.html
                           """
                     )
 
@@ -335,7 +337,7 @@ class Functions:
                 if r.status_code == 200:
                     current_directory = os.getcwd()
                     image_path = os.path.join(
-                        current_directory, f"{url}_screenshot.png"
+                        current_directory, f"{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_website_screenshot.png"
                     )
 
                     with open(image_path, "wb") as image_file:

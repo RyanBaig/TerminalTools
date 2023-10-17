@@ -41,7 +41,7 @@ Here are the commands:
 
 
 if len(sys.argv) < 2:
-    print("Usage: python main.py help")
+    print("Usage: tt help")
 else:
     command = sys.argv[1]
 
