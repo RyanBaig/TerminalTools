@@ -35,7 +35,7 @@
     │   ├── icon.ico (For Icon in Installation Window)
     │
     ├── modules/ (Section)
-    │   ├── file-management/ (SubSection)
+    │   ├── file-management/ (Subsection)
     │      ├── copy-file-directory.md 
     │      ├── create-directory.md
     │      ├── delete-file-directory.md
@@ -45,14 +45,14 @@
     │      ├── rename-file-directory.md
     │      ├── search-files-directory.md
     │
-    │   ├── db-management/ (SubSection)
+    │   ├── db-management/ (Subsection)
     │      ├── create-database.md
     │      ├── create-table.md
     │      ├── display-database.md
     │      ├── index.md (The Main Overview Page of Database Management Module)
     │      ├── sql-query.md
     │
-    │   ├── web-scraping/ (SubSection)
+    │   ├── web-scraping/ (Subsection)
     │      ├── fetch-html-content.md
     │      ├── index.md (The Main Overview Page of Web Scraping Module)
     │      ├── parse-html-from-elements-and-attributes.md
