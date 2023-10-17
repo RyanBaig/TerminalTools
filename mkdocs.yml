@@ -14,6 +14,7 @@ theme:
   logo: assets/icon.svg
   name: material
   features:
+    - content.tabs.link
     - toc
     - search.suggest
     - search.highlight
@@ -47,6 +48,10 @@ repo_url: https://github.com/RyanBaig/TerminalTools
 repo_name: RyanBaig/TerminalTools
 nav:
   - Home: index.md
+  - Installation:
+    - installation/index.md
+    - installation/users.md
+    - installation/developers.md
   - Modules:
     - modules/index.md
     - File Management Module:
@@ -85,3 +90,7 @@ extra:
           note: >- 
             Thanks for your feedback! Help us improve this page by
             using our <a href="..." target="_blank" rel="noopener">feedback form</a>.
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
