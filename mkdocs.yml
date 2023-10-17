@@ -1,0 +1,89 @@
+site_name: TerminalTools Official Documentation
+
+theme:
+  plugins:
+    - privacy
+    - optimize
+    - offline
+    - search
+    - social
+    - typeset
+  favicon: assets/icon.svg
+  icon:
+    repo: material/github
+  logo: assets/icon.svg
+  name: material
+  features:
+    - content.tabs.link
+    - toc
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.path
+    - navigation.indexes
+    - toc.follow
+    - navigation.indexes
+    - content.code.copy
+    - content.tooltips
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+
+repo_url: https://github.com/RyanBaig/TerminalTools
+repo_name: RyanBaig/TerminalTools
+nav:
+  - Home: index.md
+  - Installation:
+    - installation/index.md
+    - installation/users.md
+    - installation/developers.md
+  - Modules:
+    - modules/index.md
+    - File Management Module:
+      - modules/file-management/index.md
+      - modules/file-management/list-files-directories.md
+      - modules/file-management/create-directory.md
+      - modules/file-management/delete-file-directory.md
+      - modules/file-management/move-file-directory.md
+      - modules/file-management/rename-file-directory.md
+      - modules/file-management/copy-file-directory.md
+      - modules/file-management/search-files-directory.md
+    - Database Management Module:
+      - modules/db-management/index.md
+      - modules/db-management/sql-query.md
+      - modules/db-management/create-database.md
+      - modules/db-management/display-database.md
+      - modules/db-management/create-table.md
+    - Web Scraping Module:
+      - modules/web-scraping/index.md
+      - modules/web-scraping/fetch-html-content.md
+      - modules/web-scraping/parse-html-from-elements-and-attributes.md
+      - modules/web-scraping/take-screenshot-of-website.md
+  - About:
+    - about/CONTRIBUTING.md
+    - about/LICENSE.md
+    - about/CODE_OF_CONDUCT.md
+extra:
+  social:
+      - icon: material/link
+        link: https://ryanthedev.vercel.app/links
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+copyright: Copyright &copy; 2023 - 2023 Ryan Baig
