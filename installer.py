@@ -10,7 +10,7 @@ try:
     def install_terminal_tools():
         # Define the GitHub repository and installation directory
         github_repo = 'https://github.com/RyanBaig/TerminalTools.git'
-        install_dir = os.path.join(os.environ['PROGRAMFILES'], 'TerminalTools')
+        install_dir = os.path.join(os.environ['APPDATA'], 'TerminalTools')
 
         try:
             # Check if the installation directory already exists; if it does, remove it
