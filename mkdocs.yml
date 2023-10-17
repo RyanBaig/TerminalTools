@@ -74,23 +74,16 @@ nav:
       - modules/web-scraping/fetch-html-content.md
       - modules/web-scraping/parse-html-from-elements-and-attributes.md
       - modules/web-scraping/take-screenshot-of-website.md
+  - About:
+    - about/CONTRIBUTING.md
+    - about/LICENSE.md
+    - about/CODE_OF_CONDUCT.md
 extra:
-  analytics: 
-    feedback:
-      title: Was this page helpful?
-      ratings:
-        - icon: material/emoticon-happy-outline
-          name: This page was helpful
-          data: 1
-          note: >-
-            Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
-          name: This page could be improved
-          data: 0
-          note: >- 
-            Thanks for your feedback! Help us improve this page by
-            using our <a href="..." target="_blank" rel="noopener">feedback form</a>.
+  social:
+      - icon: material/link
+        link: https://ryanthedev.vercel.app/links
 markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+copyright: Copyright &copy; 2023 - 2023 Ryan Baig

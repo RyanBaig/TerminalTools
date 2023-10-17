@@ -27,8 +27,8 @@ Terminal Tools currently provides the following modules:
 
 # Contributing
 
-If you'd like to contribute to this project, please check out the [Contribution Guidelines](CONTRIBUTING.MD).
+If you'd like to contribute to this project, please check out the [Contribution Guidelines](https://terminaltools-docs.ryanbaig.vercel.app/about/CONTRIBUTING).
 
 # License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://terminaltools-docs.ryanbaig.vercel.app/about/LICENSE) file for details.
