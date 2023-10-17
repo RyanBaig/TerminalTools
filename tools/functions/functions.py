@@ -8,6 +8,10 @@ import subprocess
 import sqlite3
 from prettytable import PrettyTable
 
+# WebScraping imports
+from bs4 import BeautifulSoup
+import requests
+
 
 class Functions:
     # Function to list files and directories in the current directory
@@ -232,3 +236,116 @@ class Functions:
                 print(
                     f"Error: The database file '{db_name}' doesn't exist or the file path is incorrect."
                 )
+
+    class WebScraping:
+        @staticmethod
+        def fetch_page_content(url):
+            try:
+                if not url.startswith("https://"):
+                    better_url = "https://" + url
+                else:
+                    better_url = url
+                user = os.path.expanduser("~")
+                username = user.replace("C:\\Users", "")
+                enddir = os.path.join([username, "Desktop", "WebsiteContent"])
+                if not os.path.exists(enddir):
+                    os.makedirs(enddir)
+                response = requests.get(better_url)
+                if response.status_code == 200:
+                    html = response.text
+                    with open(f"{enddir}/{better_url}.html", "w") as file:
+                        file.write(html)
+                    print(
+                        f"""
+                          Web Scraper Results
+                          
+                          Status Code: {response.status_code}
+                          
+                          
+                          PAGE CONTENT:
+                          {html}
+                          
+                          
+                          The Content Has Also Been Saved to {enddir}/{url}.html
+                          """
+                    )
+
+                else:
+                    print(
+                        f"Failed to retrieve page. Status code: {response.status_code}"
+                    )
+            except requests.exceptions.RequestException as e:
+                print("Request Error: " + str(e))
+            return None
+
+        @staticmethod
+        def return_page_content(url):
+            try:
+                if not url.startswith("https://"):
+                    better_url = "https://" + url
+                else:
+                    better_url = url
+                response = requests.get(better_url)
+                if response.status_code == 200:
+                    return response.text
+                else:
+                    print(
+                        f"Failed to retrieve page. Status code: {response.status_code}"
+                    )
+            except requests.exceptions.RequestException as e:
+                print("Request Error: " + str(e))
+            return None
+
+        @staticmethod
+        def parse_html(url: str, element: str, attr=None):
+
+            if not url.startswith("https://"):
+                better_url = "https://" + url
+            else:
+                better_url = url
+            html = Functions.WebScraping.return_page_content(better_url)
+            soup = BeautifulSoup(html, "html.parser")
+            if attr and element:
+                found_html = [elements.get(attr) for elements in soup.find_all(element)]
+                print("Results with attributes:")
+                for __ in found_html:
+                    print(__)
+            elif not attr and element:
+                found_html = [elements.text for elements in soup.find_all(element)]
+                print("Results without attributes:")
+                for _ in found_html:
+                    print(_)
+
+            return None
+
+        @staticmethod
+        def take_screenshot(url: str):
+            try:
+                if not url.startswith("https://"):
+                    better_url = "https://" + url
+                else:
+                    better_url = url
+
+                token = os.environ.get("SHOT_API_TOKEN")
+                if not token:
+                    token = "P1Y95B2-XKWM858-H3MFG80-J0AQS4F"
+                apiUrl = f"https://shot.screenshotapi.net/screenshot?token={token}&url={better_url}&output=image&file_type=png&wait_for_event=load"
+                r = requests.get(apiUrl)
+
+                if r.status_code == 200:
+                    current_directory = os.getcwd()
+                    image_path = os.path.join(
+                        current_directory, f"{url}_screenshot.png"
+                    )
+
+                    with open(image_path, "wb") as image_file:
+                        image_file.write(r.content)
+
+                    print(f"Screenshot saved at path: {image_path}")
+                else:
+                    print(
+                        f"Failed to capture a screenshot. Status code: {r.status_code}"
+                    )
+
+            except Exception as e:
+                print(f"Error: {str(e)}")

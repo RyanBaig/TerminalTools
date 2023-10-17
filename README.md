@@ -95,6 +95,7 @@ Terminal Tools currently provides the following modules:
 
 - File Management
 - Database Management
+- Web Scraping
 - [Suggest More](https://github.com/RyanBaig/TerminalTools/issues/new?labels=Module%20Request)
 
 # Contributing

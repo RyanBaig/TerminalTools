@@ -33,12 +33,15 @@ Here are the commands:
 - filemanagement
     - Opens the File Management Module
 
+- webscraping
+    - Opens the WebScraping Module
+
           """)
 
 
 
 if len(sys.argv) < 2:
-    print("Usage: python your_script.py <command>")
+    print("Usage: python main.py help")
 else:
     command = sys.argv[1]
 
@@ -48,5 +51,7 @@ else:
         os.system("python tools/file-management.py")
     elif command == "dbmanagement":
         os.system("python tools/db-management.py")
+    elif command == "webscraping":
+        os.system("python tools/web-scraping.py")
     else:
         print("Invalid command. Available commands: help, filemanagement, dbmanagement")
