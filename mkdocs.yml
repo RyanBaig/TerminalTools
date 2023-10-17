@@ -49,9 +49,26 @@ nav:
   - Home: index.md
   - Modules:
     - modules/index.md
-    - modules/file-management.md
-    - modules/database-management.md
-
+    - File Management Module:
+      - modules/file-management/index.md
+      - modules/file-management/list-files-directories.md
+      - modules/file-management/create-directory.md
+      - modules/file-management/delete-file-directory.md
+      - modules/file-management/move-file-directory.md
+      - modules/file-management/rename-file-directory.md
+      - modules/file-management/copy-file-directory.md
+      - modules/file-management/search-files-directory.md
+    - Database Management Module:
+      - modules/db-management/index.md
+      - modules/db-management/sql-query.md
+      - modules/db-management/create-database.md
+      - modules/db-management/display-database.md
+      - modules/db-management/create-table.md
+    - Web Scraping Module:
+      - modules/web-scraping/index.md
+      - modules/web-scraping/fetch-html-content.md
+      - modules/web-scraping/parse-html-from-elements-and-attributes.md
+      - modules/web-scraping/take-screenshot-of-website.md
 extra:
   analytics: 
     feedback:
