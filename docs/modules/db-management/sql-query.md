@@ -10,7 +10,7 @@ The "SQL Query" function is a versatile tool that allows you to interact with da
 
 ### **_Usage_**
 
-1. Open the terminal and type tt db-management.
+1. Open the terminal and type tt `db-management`.
 2. Type the number associated with the SQL Query function. (1)
 3. You will be asked to enter the path to the database you want to query.
 4. A text file for editing SQL queries will be opened, where you can input your SQL query.

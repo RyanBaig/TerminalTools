@@ -74,6 +74,9 @@ nav:
       - modules/web-scraping/fetch-html-content.md
       - modules/web-scraping/parse-html-from-elements-and-attributes.md
       - modules/web-scraping/take-screenshot-of-website.md
+    - Miscellaneous Module:
+      - modules/miscellaneous/index.md
+      - modules/miscellaneous/coder-search.md
   - About:
     - about/CONTRIBUTING.md
     - about/LICENSE.md
