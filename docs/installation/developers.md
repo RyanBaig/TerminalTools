@@ -57,6 +57,12 @@
     │      ├── index.md (The Main Overview Page of Web Scraping Module)
     │      ├── parse-html-from-elements-and-attributes.md
     │      ├── take-screenshot-of-website.md
+    │
+    │   ├── miscellaneous/ (Subsection)
+    │      ├── coder-search.md
+    │      ├── dev-server.md
+    │      ├── exe.md
+    │      ├── index.md (The Main Overview Page of Miscellaneous Module)
     ```
 
 === "Edit the Main Tool's Files"

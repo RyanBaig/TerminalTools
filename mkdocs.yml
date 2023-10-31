@@ -77,6 +77,8 @@ nav:
     - Miscellaneous Module:
       - modules/miscellaneous/index.md
       - modules/miscellaneous/coder-search.md
+      - modules/miscellaneous/dev-server.md
+      - modules/miscellaneous/exe.md
   - About:
     - about/CONTRIBUTING.md
     - about/LICENSE.md
