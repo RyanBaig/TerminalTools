@@ -2,10 +2,10 @@
 
     The Following Steps are for if you want to edit the Documentation Files:
 
-    ### 1. Clone the Repository:
+    ### 1. Clone the Repository's Documentation branch:
     
     ```bash
-    git clone https://github.com/RyanBaig/TerminalTools.git
+    git clone -b docs https://github.com/RyanBaig/TerminalTools.git
     ```
 
     ### 2. Navigate to the Repository Folder:
