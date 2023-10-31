@@ -3,18 +3,18 @@ import os
 
 
 # Define the hyperlink URL
-url = "https://github.com/RyanBaig"
+url = "https://terminaltools-docs.ryanbaig.vercel.app"
 
 # Define Help MSG
 def help():
     print(f"""
           
  _____                   _             _            _____           _        _             ______                  
-|_   _|                 (_)           | |          |_   _|         | |      | |            | ___ \               
+|_   _|                 (_)           | |          |_   _|         | |      | |            | ___ \\               
   | | ___ _ __ _ __ ___  _ _ __   __ _| |  ______    | | ___   ___ | |___   | |__  _   _   | |_/ /   _  __ _ _ __  
-  | |/ _ \ '__| '_ ` _ \| | '_ \ / _` | | |______|   | |/ _ \ / _ \| / __|  | '_ \| | | |  |    / | | |/ _` | '_ \ 
-  | |  __/ |  | | | | | | | | | | (_| | |            | | (_) | (_) | \__ \  | |_) | |_| |  | |\ \ |_| | (_| | | | |
-  \_/\___|_|  |_| |_| |_|_|_| |_|\__,_|_|            \_/\___/ \___/|_|___/  |_.__/ \__, |  \_| \_\__, |\__,_|_| |_|
+  | |/ _ \\ '__| '_ ` _ \\| | '_ \\ / _` | | |______|   | |/ _ \\ / _ \\| / __|  | '_ \\| | | |  |    / | | |/ _` | '_ \\ 
+  | |  __/ |  | | | | | | | | | | (_| | |            | | (_) | (_) | \\__ \\  | |_) | |_| |  | |\\ \\ |_| | (_| | | | |
+  \\_/\\___|_|  |_| |_| |_|_|_| |_|\\__,_|_|            \\_/\\___/ \\___/|_|___/  |_.__/ \\__, |  \\_| \\_\\__, |\\__,_|_| |_|
                                                                                     __/ |         __/ |            
                                                                                    |___/         |___/             
           
@@ -36,6 +36,9 @@ Here are the commands:
 - webscraping
     - Opens the WebScraping Module
 
+- misc
+    - Opens the Miscellaneous Module
+
           """)
 
 
@@ -43,15 +46,31 @@ Here are the commands:
 if len(sys.argv) < 2:
     print("Usage: tt help")
 else:
-    command = sys.argv[1]
+    command: str = sys.argv[1]
 
     if command == "help":
         help()
+
     elif command == "filemanagement":
-        os.system("python tools/file-management.py")
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__))) + "\\tools\\file-management.py"
+        os.system(f"python {path}")
+
     elif command == "dbmanagement":
-        os.system("python tools/db-management.py")
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__))) + "\\tools\\db-management.py"
+        os.system(f"python {path}")
+
     elif command == "webscraping":
-        os.system("python tools/web-scraping.py")
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__))) + "\\tools\\web-scraping.py"
+        os.system(f"python {path}")
+
+    elif "misc" in command:
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__))) + "\\tools\\misc.py"
+        args = " ".join(sys.argv[2:])
+        os.system(f"python {path} {args}")
+
+    elif command == "misc":
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__))) + "\\tools\\misc.py"
+        os.system(f"python {path}")
+
     else:
-        print("Invalid command. Available commands: help, filemanagement, dbmanagement")
+        print("Invalid command. Available commands: help, filemanagement, dbmanagement, misc")

@@ -12,8 +12,11 @@ from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 import requests
 import datetime
-from datetime import date
 
+# Misc imports
+from urllib.parse import quote
+import webbrowser
+import platform
 
 class Functions:
     # Function to list files and directories in the current directory
@@ -79,6 +82,7 @@ class Functions:
                 print(f"An error occurred: {str(e)}")
 
         @staticmethod
+        # Function to copy a file or folder to the destination
         def copy(source, destination):
             try:
                 if os.path.exists(source):
@@ -94,7 +98,8 @@ class Functions:
                     print(f"'{source}' does not exist.")
             except Exception as e:
                 print(f"An error occurred: {str(e)}")
-
+        
+        # Function to search for files
         @staticmethod
         def search(directory, criteria):
             results = []
@@ -114,6 +119,7 @@ class Functions:
 
     class DBManagement:
         @staticmethod
+        # Function to send queries to a database
         def sql_query(db):
             query_file = os.path.abspath("tools/functions/query.sql")
             print("Query File Path: " + query_file)
@@ -153,6 +159,7 @@ class Functions:
                 )
 
         @staticmethod
+        # function to create a database
         def create_database(db_name, table_name, columns):
             db_folder, db_file = os.path.split(db_name)
             
@@ -184,6 +191,7 @@ class Functions:
                 print(f"An error occurred: {e}")
 
         @staticmethod
+        # function to display the contents/data of a database using PrettyTables' tables
         def display_db(db, table):
             if os.path.exists(db):
                 # Connect to DB
@@ -210,6 +218,7 @@ class Functions:
                 )
 
         @staticmethod
+        # function to create a table in pre-existing database
         def create_table(db_name, table_name, columns):
             if os.path.exists(db_name):
                 try:
@@ -241,6 +250,7 @@ class Functions:
 
     class WebScraping:
         @staticmethod
+        # self-explanatory
         def fetch_page_content(url: str):
             try:
                 if not url.startswith("https://"):
@@ -281,6 +291,7 @@ class Functions:
             return None
 
         @staticmethod
+        # self-explanatory
         def return_page_content(url):
             try:
                 if not url.startswith("https://"):
@@ -299,6 +310,7 @@ class Functions:
             return None
 
         @staticmethod
+        # function to parse html and return the values of elements and attributes, if provided.
         def parse_html(url: str, element: str, attr=None):
 
             if not url.startswith("https://"):
@@ -321,6 +333,7 @@ class Functions:
             return None
 
         @staticmethod
+        # function to take screenshot of any website
         def take_screenshot(url: str):
             try:
                 if not url.startswith("https://"):
@@ -351,3 +364,50 @@ class Functions:
 
             except Exception as e:
                 print(f"Error: {str(e)}")
+    class Miscellaneous:
+        @staticmethod
+        # function to open google on a web browser with the user's query and only displays answers from GitHub or StackOverflow
+        def coder_search(args):
+            # Get the user's query from the command line.
+            try:
+                if args:
+                    query = args
+                    query = " ".join(query) + " site:stackoverflow.com OR site:github.com"
+                    query = query.replace("'", '"')
+
+                    # Encode the query for safe transmission over the network.
+                    query = quote(query)
+
+                    # Open the Google search results page for the encoded query in a web browser.
+                    webbrowser.open("https://www.google.com/search?q=" + query)
+                else:
+                    print("ERROR! Please Make Sure Your Query is Present.")
+            except IndexError:
+                    print("Indexing Error! Please Make Sure Your Query is Present.")
+                    exit()
+        
+        @staticmethod
+        def devserver(cmd):
+            # function to open/close a local development server
+            if cmd:
+                if cmd == "start":
+                    current_directory = os.getcwd()
+                    subprocess.Popen(["python", "-m", "http.server", "8080"], cwd=current_directory)
+                    print(f"Server started at http://localhost:8080. Serving from {current_directory}")
+                    webbrowser.open("http://localhost:8080")
+                elif cmd == "stop":
+                    if platform.system() == "Windows":
+                        subprocess.Popen(["taskkill", "/f", "/im", "python.exe"])
+                        print("Server stopped")
+                    else:
+                        subprocess.Popen(["pkill", "-f", "python -m http.server"])
+                        print("Server stopped")
+                else:
+                    print("Invalid command!")
+            else:
+                print("Please provide a command!")
+        @staticmethod
+        # self-explanatory
+        def exe():
+            os.system("auto-py-to-exe.exe")
+            print("Auto-PY-To-EXE dialog box closed and prcoess finished.")
