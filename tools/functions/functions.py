@@ -410,4 +410,4 @@ class Functions:
         # self-explanatory
         def exe():
             os.system("auto-py-to-exe.exe")
-            print("Auto-PY-To-EXE dialog box closed and prcoess finished.")
+            print("Auto-PY-To-EXE dialog box closed and process finished.")
