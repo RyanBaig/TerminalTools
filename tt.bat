@@ -1,5 +1,5 @@
 @echo off
 
-set "abs_path=%~dp0execute.py"
+set "abs_path=%~dp0commands.py"
 
 python %abs_path% %*
