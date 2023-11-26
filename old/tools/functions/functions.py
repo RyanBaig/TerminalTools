@@ -423,14 +423,14 @@ class Functions:
 
                 token = os.environ.get("SHOT_API_TOKEN")
                 if not token:
-                    token = "P1Y95B2-XKWM858-H3MFG80-J0AQS4F"
-                apiUrl = f"https://api.screenshotone.com/take?url={better_url}&access_key={token}"
+                    token = "nNwFGB8NgyKd2A"
+                apiUrl = f"https://api.screenshotone.com/animate?url={better_url}&scenario=scroll&access_key=nNwFGB8NgyKd2A"
                 r = requests.get(apiUrl)
 
                 if r.status_code == 200:
                     current_directory = os.getcwd()
                     image_path = os.path.join(
-                        current_directory, f"{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_website_screenshot.png"
+                        current_directory, f"{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_website_screenshot.mp4"
                     )
 
                     with open(image_path, "wb") as image_file:
@@ -439,32 +439,32 @@ class Functions:
                     print(f"Screenshot saved at path: {image_path}")
                 else:
                     print(
-                        f"Failed to capture a screenshot. Status code: {r.status_code} and Message: {r.json()} and URL: {apiUrl}"
+                        f"Failed to capture a screenshot. Status code: {r.status_code} and Message:\n {r.json()}\n and URL: {apiUrl}"
                     )
 
             except Exception as e:
                 print(f"Error: {str(e)}")
     class Miscellaneous:
         @staticmethod
-        # function to open google on a web browser with the user's query and only displays answers from GitHub or StackOverflow
         def coder_search(args):
             # Get the user's query from the command line.
             try:
                 if args:
-                    query = args
-                    query = " ".join(query) + " site:stackoverflow.com OR site:github.com"
+                    query = " ".join(args)  # Concatenate the words in the tuple
+                    
+                    query = query + " site:stackoverflow.com OR site:github.com"
                     query = query.replace("'", '"')
 
                     # Encode the query for safe transmission over the network.
                     query = quote(query)
 
                     # Open the Google search results page for the encoded query in a web browser.
-                    webbrowser.open("https://www.google.com/search?q=" + query)
+                    webbrowser.open(f"https://www.google.com/search?q={query}")
                 else:
                     print("ERROR! Please Make Sure Your Query is Present.")
             except IndexError:
-                    print("Indexing Error! Please Make Sure Your Query is Present.")
-                    exit()
+                print("Indexing Error! Please Make Sure Your Query is Present.")
+                exit()
         
         @staticmethod
         def devserver(cmd):

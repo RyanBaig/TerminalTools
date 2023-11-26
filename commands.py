@@ -126,9 +126,9 @@ def webscraping():
     Commands related to the Web Scraping Module
     
     Available Commands:
-    - fetch_page (Fetch Page Content)
-    - parse_html (Parse and Search HTML Content of a Website/Webpage)
-    - take_ss (Take Screenshot of a Webpage)
+    - fetchpage (Fetch Page Content)
+    - parsehtml (Parse and Search HTML Content of a Website/Webpage)
+    - takescreenshot (Take a Scrolling Screenshot of a Webpage)
     """
 
     def fetch_page_content(URL):
@@ -145,14 +145,63 @@ def webscraping():
 
     def take_ss(URL):
         """
-        Take Screenshot of a Webpage
+        Take a Scrolling Screenshot of a Webpage
         """
         funcs.WebScraping.take_screenshot(URL)
 
     return {
-        'fetch_page': fetch_page_content,
-        'parse_html': parse_html,
-        'take_ss': take_ss
+        'fetchpage': fetch_page_content,
+        'parsehtml': parse_html,
+        'takescreenshot': take_ss
+    }
+# -------------------- Miscellaneous Module --------------------
+def misc():
+    """
+    Commands related to the Miscellaneous Module
+    
+    Available Commands:
+    - codersearch/cs (Search Google with results from GitHub or StackOverflow Only.)
+    - devserver/dev (
+        Start a local development serve on localhost:8080 with files from the current directory
+    
+        Commands:
+            start (Start the server)
+            stop (Stop the server)
+    )
+
+    - exe (Start Auto-PY-To-EXE packager dialog)
+    """
+
+    def csearch(*QUERY):
+        """
+        Search Google with results from GitHub or StackOverflow Only
+        """
+        funcs.Miscellaneous.coder_search(QUERY)
+    
+    def devserver(CMD):
+        """
+        Start a local development served on localhost:8080 with files from the current directory (tt -m dev -h for commands)
+        
+        Commands:
+        - start (Start the server)
+        - stop (Stop the server)
+        
+        """
+        funcs.Miscellaneous.devserver(CMD)
+        
+
+    def exe():
+        """
+        Start Auto-PY-To-EXE packager dialog
+        """
+        funcs.Miscellaneous.exe() 
+
+    return {
+        'codersearch': csearch,
+        'cs': csearch,
+        'devserver': devserver,
+        'dev': devserver,
+        'exe': exe
     }
 
 # -------------------- Startup --------------------
@@ -161,10 +210,12 @@ if __name__ == '__main__':
     CLI = {
         '--db': db,
         '--files': files,
-        '-db': db,
-        '-files': files,
+        '-dbm': db,
+        '-fm': files,
         '--webscr': webscraping,
-        '-webscr': webscraping
+        '-web': webscraping,
+        '--misc': misc,
+        '-m': misc
     }
 
     # -------------------- Welcome MSG --------------------
