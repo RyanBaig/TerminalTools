@@ -396,23 +396,22 @@ class Functions:
         @staticmethod
         # function to parse html and return the values of elements and attributes, if provided.
         def parse_html(url: str, element: str, attr=None):
-
             if not url.startswith("https://"):
-                better_url = "https://" + url
-            else:
-                better_url = url
-            html = Functions.WebScraping.return_page_content(better_url)
+                url = "https://" + url
+
+            html = Functions.WebScraping.return_page_content(url)
             soup = BeautifulSoup(html, "html.parser")
-            if attr and element:
-                found_html = [elements.get(attr) for elements in soup.find_all(element)]
-                print("Results with attributes:")
-                for __ in found_html:
-                    print(__)
-            elif not attr and element:
-                found_html = [elements.text for elements in soup.find_all(element)]
-                print("Results without attributes:")
-                for _ in found_html:
-                    print(_)
+
+            if attr:
+                elements = soup.find_all(element, class_=attr)
+            else:
+                elements = soup.find_all(element)
+
+            if elements:
+                for el in elements:
+                    print(el.text if el.text else "No text found")
+            else:
+                print("No elements found.")
 
             return None
 
