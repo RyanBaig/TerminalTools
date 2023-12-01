@@ -20,9 +20,10 @@ Follow the instructions given on the [Documentation Website](https://terminaltoo
 
 Terminal Tools currently provides the following modules:
 
-- File Management
-- Database Management
-- Web Scraping
+- [File Management](https://terminaltools-docs.ryanbaig.vercel.app/modules/file-management)
+- [Database Management](https://terminaltools-docs.ryanbaig.vercel.app/modules/db-management)
+- [Web Scraping](https://terminaltools-docs.ryanbaig.vercel.app/modules/web-scraping)
+- [Miscellaneous](https://terminaltools-docs.ryanbaig.vercel.app/modules/miscellaneous)
 - [Suggest More](https://github.com/RyanBaig/TerminalTools/issues/new?labels=Module%20Request)
 
 # Contributing
