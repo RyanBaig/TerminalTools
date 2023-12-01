@@ -10,10 +10,20 @@ The "Create Directory" function, part of the File Management Module, empowers yo
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **Create Directory** function. (2)
-3. You will be prompted to provide the name for the new directory.
-4. Optionally, you can specify the path where the new directory should be created.
-5. The new directory will be created.
+1. Open the terminal and type:
 
-By using this function, you gain the ability to effortlessly create directories tailored to your specific needs, enhancing your file management capabilities and overall organization.
+```bash
+tt --files create_dir [ARGS]
+# or
+tt -fm create_dir [ARGS]
+```
+
+### ****Arguments****
+
+- **--DIRPATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm create_dir --DIRPATH C:\\Users\\MyUser\\ProjectName\\MyFolder
+```

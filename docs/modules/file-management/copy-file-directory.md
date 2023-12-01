@@ -10,10 +10,28 @@ The "Copy File or Directory" function within the File Management Module is a ver
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **Copy File or Directory** function. (6)
-3. You will be prompted to provide the source path of the file or directory you wish to copy.
-4. Input the destination path where you want to copy the file or directory.
-5. The file or directory will be copied to the specified destination path.
+1. Open the terminal and type:
 
-With this function, you can effortlessly create duplicates of files or directories, ensuring data redundancy and enhanced file management within your system.
+```bash
+tt --files copy [ARGS]
+# or
+tt -fm copy [ARGS]
+```
+
+### \***\*Arguments\*\***
+
+- **--SOURCE (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm copy --SOURCE C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- **--DEST (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm copy --SOURCE C:\\Users\\MyUser\\ProjectName --DEST C:\\Users\\MyUser\\Backups\\ProjectName
+```

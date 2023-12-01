@@ -10,16 +10,38 @@ Creates a new table in an existing database with the specified columns.
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt db-management`.
-2. Type the number associated with the **Create Table** function. (10)
-3. You will be asked to enter the path of the database in which you want to create the table.
-4. Provide a name for the new table you want to add.
-5. Specify the columns for the new table, following the format:
- 
-`
-   {column_name} {data_type}, {column_name} {data_type}, ...
-`
+1. Open the terminal and type:
 
-6. The new table will be created in the existing database with the specified columns.
+```bash
+tt --db createtable [ARGS]
+# or
+tt -dbm createtable [ARGS]
+```
 
+### ****Arguments****
 
+- **--DBPATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --db createtable --DBPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- **--TABLENAME (Required)**
+
+**_Example:_**
+
+```bash
+tt --db createtable --TABLENAME MyTable --DBPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- **--COLUMNS (Required)**
+
+**_Example:_**
+
+```bash
+tt --db createtable --COLUMNS 'id(INTEGER PRIMARY_KEY), name(TEXT), age(INTEGER)' --DBPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db --TABLENAME MyTable
+```
+
+_(Please make sure there are single quotes (') or double-quotes (") around the column args.)_

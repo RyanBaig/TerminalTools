@@ -10,7 +10,20 @@ The "List Files and Directories" function within the File Management Module is a
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **List Files and Directories** function. (1)
-3. You will be asked to enter the path of the directory you want to list.
-4. The list of files and directories within the specified directory will be displayed.
+1. Open the terminal and type:
+
+```bash
+tt --files list_files_dirs [ARGS]
+# or
+tt -fm list_files_dirs [ARGS]
+```
+
+### ****Arguments****
+
+- **--PATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm list_files_dirs --PATH C:\\Users\\MyUser\\ProjectName\\MyFolder
+```

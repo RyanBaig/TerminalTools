@@ -10,10 +10,28 @@ The "Rename File or Directory" function within the File Management Module is a v
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **Rename File or Directory** function. (5)
-3. You will be prompted to provide the path of the file or directory you wish to rename.
-4. Input the new name that you want for the file or directory.
-5. The file or directory will be renamed.
+1. Open the terminal and type:
 
-By using this function, you can conveniently update file or directory names, improving the clarity and organization of your file system with ease.
+```bash
+tt --files rename [ARGS]
+# or
+tt -fm rename [ARGS]
+```
+
+### ****Arguments****
+
+- **--PATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm rename --PATH C:\\Users\\MyUser\\ProjectName\\MyFolder1
+```
+
+- **--NEWNAME (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm rename --PATH C:\\Users\\MyUser\\ProjectName\\MyFolder1 --NEWNAME C:\\Users\\MyUser\\ProjectName\\MyFolder2
+```

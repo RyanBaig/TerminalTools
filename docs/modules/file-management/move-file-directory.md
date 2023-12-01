@@ -10,10 +10,28 @@ The "Move File or Directory" function within the File Management Module is a ver
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **Move File or Directory** function. (4)
-3. You will be prompted to provide the source path of the file or directory you wish to move.
-4. Next, input the destination path where you want to move the file or directory.
-5. The file or directory will be moved.
+1. Open the terminal and type:
 
-By using this function, you can easily manage your file system, rename files, and ensure that files and directories are in the right location, all with a few simple inputs.
+```bash
+tt --files move [ARGS]
+# or
+tt -fm move [ARGS]
+```
+
+### ****Arguments****
+
+- **--SOURCE (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm move --SOURCE C:\\Users\\MyUser\\ProjectName\\MyFolder1
+```
+
+- **--DEST (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm move --SOURCE C:\\Users\\MyUser\\ProjectName\\MyFolder1 --DEST C:\\Users\\MyUser\\ProjectName\\MyFolder2
+```

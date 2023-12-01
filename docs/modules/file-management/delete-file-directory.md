@@ -10,9 +10,20 @@ The "Delete File or Directory" function within the File Management Module is a p
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt file-management`.
-2. Type the number associated with the **Delete File or Directory** function. (3)
-3. You will be prompted to provide the path of the file or directory you wish to delete.
-4. The file or directory will be deleted.
+1. Open the terminal and type:
 
-By using this function, you can confidently and efficiently remove files or directories, maintaining a clean and organized file system tailored to your needs.
+```bash
+tt --files delete_files_dirs [ARGS]
+# or
+tt -fm delete_files_dirs [ARGS]
+```
+
+### ****Arguments****
+
+- **--DIRPATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --fm delete_files_dirs --DIRPATH C:\\Users\\MyUser\\ProjectName\\MyFolder
+```

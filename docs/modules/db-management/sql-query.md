@@ -10,9 +10,20 @@ The "SQL Query" function is a versatile tool that allows you to interact with da
 
 ### **_Usage_**
 
-1. Open the terminal and type tt `db-management`.
-2. Type the number associated with the SQL Query function. (1)
-3. You will be asked to enter the path to the database you want to query.
-4. A text file for editing SQL queries will be opened, where you can input your SQL query.
-5. Save and close the text file when you're done.
-6. The query will be executed on the specified database, and the results will be displayed.
+1. Open the terminal and type:
+
+```bash
+tt --db sqlquery [ARGS]
+# or
+tt -dbm sqlquery [ARGS]
+```
+
+### ****Arguments****
+
+- **--DB (Required)**
+
+**_Example:_**
+
+```bash
+tt --db sqlquery --DB C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```

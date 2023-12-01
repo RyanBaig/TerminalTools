@@ -10,7 +10,20 @@ This function allows you to retrieve the HTML content from a specified webpage. 
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt web-scraping`.
-2. Type the number associated with the **Fetch HTML Content from a Webpage** function (1).
-3. You will be prompted to enter the URL of the webpage.
-4. The HTML content of the webpage will be fetched and displayed.
+1. Open the terminal and type:
+
+```bash
+tt --webscr fetchpage [ARGS]
+# or
+tt -web fetchpage [ARGS]
+```
+
+### ***Arguments***
+
+- **--URL (Required)**
+
+**_Example:_**
+
+```bash
+tt --webscr fetchpage --URL https://google.com
+```

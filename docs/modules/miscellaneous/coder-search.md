@@ -8,9 +8,29 @@ title: 1. Coder-Search
 
 Searches user queries on GitHub or StackOverflow using Google.
 
-### **_Usage_**:
+### **_Usage_**
 
-- Command: `tt misc coder-search {query}`
-- Aliases: `tt misc cs`
+1. Open the terminal and type:
 
-With this function, you can easily get answers to your coding-related questions instantly!
+```bash
+tt --misc codersearch [ARGS]
+# or
+tt -m codersearch [ARGS]
+```
+
+### **_Aliases_**
+
+- `tt -m codersearch`
+- `tt -m cs`
+- `tt --misc codersearch`
+- `tt --misc cs`
+
+### ****Arguments****
+
+- **--QUERY (Required)**
+
+**_Example:_**
+
+```bash
+tt -m codersearch --QUERY What Are LLMS?
+```

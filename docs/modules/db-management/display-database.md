@@ -10,8 +10,28 @@ The "Display Database" function provides a convenient way to retrieve and visual
 
 ### **_Usage_**
 
-1. Open the terminal and type `tt db-management`.
-2. Type the number associated with the **Display Database** function. (3)
-3. You will be asked to enter the path to the database you want to display data from.
-4. You will also be prompted to enter the name of the table you want to retrieve data from.
-5. The data from the specified table in the database will be displayed.
+1. Open the terminal and type:
+
+```bash
+tt --db displaydb [ARGS]
+# or
+tt -dbm displaydb [ARGS]
+```
+
+### ****Arguments****
+
+- **--DBPATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --db displaydb --DBPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- **--TABLENAME (Required)**
+
+**_Example:_**
+
+```bash
+tt --db displaydb --TABLENAME MyTable --DBPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```

@@ -2,7 +2,7 @@
 
 ### 1. **Download the Installer:**
 
-   Download the installer executable from [here.](https://github.com/RyanBaig/TerminalTools/raw/master/installer.exe)
+   Download the installer executable from [here.](https://github.com/RyanBaig/TerminalTools/raw/master/installer/installer.exe)
 
 ### 2. **Run as Administrator:**
 
@@ -27,13 +27,17 @@ To use Terminal Tools, follow these instructions on the terminal:
 === "Using Command Prompt"
 
     ```bash
-    tt help
+    tt -h
+    # or
+    tt --help
     ```
 
 === "Using Powershell"
 
     ```bash
-    ./tt help
+    .\ tt --help
+    # or
+    .\ tt -h
     ```
 
 

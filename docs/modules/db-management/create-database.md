@@ -10,14 +10,38 @@ The "Create Database" function is a fundamental tool for managing databases. It 
 
 ### **_Usage_**
 
-1. pen the terminal and type tt `db-management`.
-2. Type the number associated with the Create Database function. (2)
-3. You will be asked to enter the path for the new database you want to create.
-4. Provide a name for the new table within the database.
-5. Specify the columns for the new table, following the format:
+1. Open the terminal and type:
 
-`
-   {column_name} {data_type}, {column_name} {data_type}, ...
-`
+```bash
+tt --db createdb [ARGS]
+# or
+tt -dbm createdb [ARGS]
+```
 
-1. The new database and table will be created with the specified columns.
+### ****Arguments****
+
+- **--DIRPATH (Required)**
+
+**_Example:_**
+
+```bash
+tt --db createdb --DIRPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- \*_--TABLENAME (Required)_
+
+**_Example:_**
+
+```bash
+tt --db createdb --TABLENAME MyTable --DIRPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db
+```
+
+- **--COLUMNS (Required)**
+
+**_Example:_**
+
+```bash
+tt --db createdb --COLUMNS 'id(INTEGER PRIMARY_KEY), name(TEXT), age(INTEGER)' --DIRPATH C:\\Users\\MyUser\\ProjectName\\sqlite.db --TABLENAME MyTable
+```
+
+_(Please make sure there are single quotes (') or double-quotes (") around the column args.)_
