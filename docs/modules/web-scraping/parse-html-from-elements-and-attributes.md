@@ -25,7 +25,7 @@ tt -web parsehtml [ARGS]
 **_Example:_**
 
 ```bash
-tt --webscr parsehtml --URL https://google.com
+tt --webscr parsehtml --URL https://quotes.toscrape.com
 ```
 
 - **--ELEMENT (Required)**
@@ -33,7 +33,7 @@ tt --webscr parsehtml --URL https://google.com
 **_Example:_**
 
 ```bash
-tt --webscr parsehtml --URL https://google.com --ELEMENT p 
+tt --webscr parsehtml --URL https://quotes.toscrape.com --ELEMENT a
 ```
 
 - **--ATTRIBUTE (Optional)**
@@ -41,5 +41,7 @@ tt --webscr parsehtml --URL https://google.com --ELEMENT p
 **_Example:_**
 
 ```bash
-tt --webscr parsehtml --URL https://google.com --ELEMENT p --ATTRIBUTE class="some class in a p attribute in google.com"
+tt --webscr parsehtml --URL https://quotes.toscrape.com --ELEMENT a --ATTRIBUTE 'tag'
+# The above code means to search the webpage for an <a> element with any attribute with value 'tag'
+# it could be 'href' or 'class'.
 ```
