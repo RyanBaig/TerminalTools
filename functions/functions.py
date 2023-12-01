@@ -1,26 +1,30 @@
+"""
+Functions for TerminalTools.
+"""
+import datetime
+import fnmatch
 # File management imports
 import os
+import platform
 import shutil
-import fnmatch
-
+import sqlite3
 # DB management imports
 import subprocess
-import sqlite3
-from prettytable import PrettyTable
-import platform
-
-# WebScraping imports
-from bs4 import BeautifulSoup
-import requests
-import datetime
-
+import webbrowser
 # Misc imports
 from urllib.parse import quote
-import webbrowser
-import platform
+
+import requests
+# WebScraping imports
+from bs4 import BeautifulSoup
+from envhub import get_var
+from prettytable import PrettyTable
 
 
 class Functions:
+    """
+    TerminalTools Functions.
+    """
     # Function to list files and directories in the current directory
     class FileManagement:
         @staticmethod
@@ -421,10 +425,9 @@ class Functions:
                 else:
                     better_url = url
 
-                token = os.environ.get("SHOT_API_TOKEN")
-                if not token:
-                    token = "nNwFGB8NgyKd2A"
-                apiUrl = f"https://api.screenshotone.com/animate?url={better_url}&scenario=scroll&access_key=nNwFGB8NgyKd2A"
+                token = get_var("SHOT_API_TOKEN")
+                
+                apiUrl = f"https://api.screenshotone.com/animate?url={better_url}&scenario=scroll&access_key={token}"
                 r = requests.get(apiUrl)
 
                 if r.status_code == 200:
