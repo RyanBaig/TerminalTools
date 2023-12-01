@@ -12,7 +12,7 @@ We welcome and appreciate contributions to the Terminal Tools project. By contri
 #### 2. Clone the forked repository to your local development environment:
 
 ```bash
-git clone https://github.com/RyanBaig/terminal-tools.git
+git clone https://github.com/RyanBaig/TerminalTools.git
 ```
 
 #### 3. Create a new branch for your contribution:
