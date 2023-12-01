@@ -18,7 +18,7 @@ tt --db displaydb [ARGS]
 tt -dbm displaydb [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DBPATH (Required)**
 

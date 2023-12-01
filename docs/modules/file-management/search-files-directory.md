@@ -18,7 +18,7 @@ tt --files search [ARGS]
 tt -fm search [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DIR (Required)**
 
@@ -36,4 +36,4 @@ tt --fm search --DIR C:\\Users\\MyUser\\ProjectName\\MyFolder
 tt --fm search --DIR C:\\Users\\MyUser\\ProjectName\\MyFolder --CRITERIA *.py
 ```
 
-\*(Please make sure the criteria you provided is following the correct types: file name (filename), extension (_\*\*.py), or content (this is the content from myfile.txt)')_
+*(Please make sure the criteria you provided is following the correct types: file name (filename), extension (***.py), or content (this is the content from myfile.txt)')*

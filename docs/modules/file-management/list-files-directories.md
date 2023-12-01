@@ -18,7 +18,7 @@ tt --files list_files_dirs [ARGS]
 tt -fm list_files_dirs [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--PATH (Required)**
 

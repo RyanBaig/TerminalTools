@@ -18,7 +18,7 @@ tt --files rename [ARGS]
 tt -fm rename [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--PATH (Required)**
 

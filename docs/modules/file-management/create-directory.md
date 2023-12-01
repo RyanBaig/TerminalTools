@@ -18,7 +18,7 @@ tt --files create_dir [ARGS]
 tt -fm create_dir [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DIRPATH (Required)**
 

@@ -18,7 +18,7 @@ tt --files delete_files_dirs [ARGS]
 tt -fm delete_files_dirs [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DIRPATH (Required)**
 

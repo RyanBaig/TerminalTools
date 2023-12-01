@@ -18,7 +18,7 @@ tt --db sqlquery [ARGS]
 tt -dbm sqlquery [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DB (Required)**
 

@@ -25,7 +25,7 @@ tt -m codersearch [ARGS]
 - `tt --misc codersearch`
 - `tt --misc cs`
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--QUERY (Required)**
 

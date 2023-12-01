@@ -18,7 +18,7 @@ tt --db createdb [ARGS]
 tt -dbm createdb [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DIRPATH (Required)**
 

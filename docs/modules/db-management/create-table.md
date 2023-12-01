@@ -18,7 +18,7 @@ tt --db createtable [ARGS]
 tt -dbm createtable [ARGS]
 ```
 
-### ****Arguments****
+### **_Arguments_**
 
 - **--DBPATH (Required)**
 
