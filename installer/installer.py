@@ -12,6 +12,7 @@ try:
         github_repo = 'https://github.com/RyanBaig/TerminalTools.git'
         install_dir = os.path.join(os.environ['APPDATA'], 'TerminalTools')
 
+        
         try:
             # Check if the installation directory already exists; if it does, remove it
             if os.path.exists(install_dir):
@@ -29,10 +30,13 @@ try:
             # Stop the progress bar
             progress.stop()
 
-            # Add the installation directory to the PATH
             path_env = os.environ['PATH']
-            path_env += f';{install_dir}'
+            path_env += os.pathsep + install_dir
             os.environ['PATH'] = path_env
+
+            # Save the changes to the PATH environment variable
+            # This is specific to Windows, modify it accordingly for other operating systems
+            os.system('setx PATH "{}"'.format(path_env))
 
             status_label.config(text="TerminalTools has been installed and added to the PATH.")
             progress["value"] = 100  # Set the progress bar to 100% when installation is complete
