@@ -2,18 +2,20 @@
 Functions for TerminalTools.
 """
 import datetime
-import fnmatch
+
 # File management imports
 import os
 import platform
 import shutil
 import sqlite3
+import fnmatch
+import glob
+from concurrent.futures import ThreadPoolExecutor
 # DB management imports
 import subprocess
 import webbrowser
 # Misc imports
 from urllib.parse import quote
-
 import requests
 # WebScraping imports
 from bs4 import BeautifulSoup
@@ -127,23 +129,43 @@ class Functions:
         @staticmethod
         def search(directory, criteria):
             if directory is None or criteria is None:
-                print("Args: --DB <path to db>")
+                print("Args: --DB ")
             else:
                 input('Please make sure the criteria you provided is following the correct types: file name, extension, or content')
-                results = []
-                try:
-                    for root, _, files in os.walk(directory):
-                        for file in files:
-                            if fnmatch.fnmatch(file, criteria):
-                                results.append(os.path.join(root, file))
-                    if results:
-                        print("Search Results:")
-                        for result in results:
-                            print(result)
-                    else:
-                        print("No matching files or directories found.")
-                except Exception as e:
-                    print(f"An error occurred: {str(e)}")
+                if input:
+                    try:
+                        found_files = []
+                        # If search pattern is a file name
+                        if os.path.exists(os.path.join(directory, criteria)):
+                            found_files.append(os.path.join(directory, criteria))
+                        # If search pattern is an extension
+                        elif criteria.startswith('*'):
+                            pattern = '*' + criteria
+                            found_files.extend(glob.glob(os.path.join(directory, pattern)))
+
+                        # If search pattern is content within files
+                        else:
+                            for root, dirnames, filenames in os.walk(directory):
+                                for filename in fnmatch.filter(filenames, '*'):  
+                                    file_path = os.path.join(root, filename)
+                                    with open(file_path, 'r', encoding="utf-8", errors='ignore') as file:     
+                                        if criteria in file.read():
+                                            found_files.append(file_path)
+
+                            if len(found_files) == 0:
+                                print("No files found matching the search pattern.")
+                            else:
+                                print("Found files:")
+                                path = os.path.join(os.getcwd(), "found_files.txt")
+                                for file_path in found_files:
+                                    print(file_path)
+                                    
+                                    with open(path, 'a') as f:
+                                        f.write(file_path + '\n')
+                                print(f"Found {len(found_files)} files matching the search pattern and saved to {path}.")
+
+                    except Exception as e:
+                        print('An Error Occured: ' + str(e))
 
     class DBManagement:
         @staticmethod
