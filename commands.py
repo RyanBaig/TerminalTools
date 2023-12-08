@@ -204,11 +204,27 @@ try:
             'dev': devserver,
             'exe': exe
         }
+    # -------------------- Git Module --------------------
 
+    def git():
+        """
+        Commands for the Git Module.
+
+        Available Commands:
+        - resolveconflicts (Resolve Merge Conflicts)
+        """
+        def resolveconflicts():
+            funcs.Git.resolveconflicts()
+        
+        return {
+            'resolveconflicts': resolveconflicts
+        }
     # -------------------- Startup --------------------
 
     if __name__ == '__main__':
         CLI = {
+            '--git': git,
+            '-git': git,
             '--db': db,
             '--files': files,
             '-dbm': db,
@@ -247,4 +263,4 @@ try:
 except KeyboardInterrupt:
     pass
 except Exception as e:
-    print('An Error Occured: ' + e)
+    print('An Error Occured: ' + str(e))
