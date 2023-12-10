@@ -15,7 +15,6 @@ theme:
   name: material
   features:
     - content.tabs.link
-    - toc
     - search.suggest
     - search.highlight
     - search.share
