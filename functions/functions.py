@@ -18,6 +18,8 @@ import webbrowser
 # Misc imports
 from urllib.parse import quote
 import requests
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 # WebScraping imports
 from bs4 import BeautifulSoup
@@ -493,25 +495,70 @@ class Functions:
                 exit()
         
         @staticmethod
+        class MyHandler(FileSystemEventHandler):
+            server_process = None  # To store the server process instance
+
+            def start_server(self):
+                current_directory = os.getcwd()
+                self.server_process = subprocess.Popen(["python", "-m", "http.server", "8080"], cwd=current_directory)
+                print(f"Server started at http://localhost:8080. Serving from {current_directory}")
+                
+                print("Watching for changes in the current working directory...")
+
+            def stop_server(self):
+                if self.server_process and self.server_process.poll() is None:
+                    self.server_process.terminate()
+                    self.server_process.wait()
+                    print("Server stopped")
+
+            def restart_server(self):
+                self.stop_server()
+                self.start_server()
+
+            def on_any_event(self, event):
+                if platform.system() == "Windows":
+                    subprocess.Popen(["taskkill", "/f", "/im", "python.exe"])
+                    print("Server stopped")
+                else:
+                    subprocess.Popen(["pkill", "-f", "python -m http.server"])
+                    print("Server stopped")
+
+                self.restart_server()
+
+        @staticmethod
+        def start_watching():
+            # Get the current working directory
+            cwd = os.getcwd()
+
+            # Set up the watchdog observer
+            observer = Observer()
+            observer.schedule(Functions.Miscellaneous.MyHandler(), path=cwd, recursive=True)
+            observer.start()
+
+            try:
+                while True:
+                    # Keep the script running
+                    pass
+            except KeyboardInterrupt:
+                observer.stop()
+            observer.join()
+
+        @staticmethod
         def devserver(cmd):
             # function to open/close a local development server
             if cmd:
                 if cmd == "start":
-                    current_directory = os.getcwd()
-                    subprocess.Popen(["python", "-m", "http.server", "8080"], cwd=current_directory)
-                    print(f"Server started at http://localhost:8080. Serving from {current_directory}")
+                    handler = Functions.Miscellaneous.MyHandler()
+                    handler.start_server()
                     webbrowser.open("http://localhost:8080")
+                    Functions.Miscellaneous.start_watching()
                 elif cmd == "stop":
-                    if platform.system() == "Windows":
-                        subprocess.Popen(["taskkill", "/f", "/im", "python.exe"])
-                        print("Server stopped")
-                    else:
-                        subprocess.Popen(["pkill", "-f", "python -m http.server"])
-                        print("Server stopped")
+                    Functions.Miscellaneous.MyHandler().stop_server()
                 else:
                     print("Invalid command!")
             else:
                 print("Please provide a command!")
+
         @staticmethod
         # self-explanatory
         def exe():
