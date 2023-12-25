@@ -8,8 +8,10 @@ View it's documentation [here.](https://terminaltools-docs.ryanbaig.vercel.app)
 
 ## Features
 
-- File management tools.
-- Database management tools.
+- File Management Tools.
+- Database Management Tools.
+- Miscellaneous Tools.
+- Git-Related Tools.
 - Easy-to-use command-line interface.
 - Designed for developers and users.
 
@@ -25,6 +27,7 @@ Terminal Tools currently provides the following modules:
 - [Database Management](https://terminaltools-docs.ryanbaig.vercel.app/modules/db-management)
 - [Web Scraping](https://terminaltools-docs.ryanbaig.vercel.app/modules/web-scraping)
 - [Miscellaneous](https://terminaltools-docs.ryanbaig.vercel.app/modules/miscellaneous)
+- [Git](https://terminaltools-docs.ryanbaig.vercel.app/modules/git)
 - [Suggest More](https://github.com/RyanBaig/TerminalTools/issues/new?labels=Module%20Request)
 
 # Contributing
