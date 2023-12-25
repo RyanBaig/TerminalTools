@@ -532,8 +532,10 @@ class Functions:
 
         @staticmethod
         def exe():
-            os.system("./auto-py-to-exe.exe")
-            print("Auto-PY-To-EXE dialog box closed and process finished.")
+            exepath = os.path.abspath("./functions/auto-py-to-exe.exe")
+            print(exepath)
+            subprocess.Popen([exepath])
+            
 
     class Git:
         @staticmethod
