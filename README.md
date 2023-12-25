@@ -14,6 +14,7 @@ View it's documentation [here.](https://terminaltools-docs.ryanbaig.vercel.app)
 - Designed for developers and users.
 
 ## Installation
+
 Follow the instructions given on the [Documentation Website](https://terminaltools-docs.ryanbaig.vercel.app/installation) to install and use **Terminal Tools**.
 
 ## Modules

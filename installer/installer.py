@@ -1,9 +1,10 @@
 try:
     import os
     import subprocess
+    import threading
     import tkinter as tk
     from tkinter import ttk
-    import threading
+
     from ttkbootstrap import Style
 
     # Function to perform installation

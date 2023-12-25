@@ -2,28 +2,24 @@
 Functions for TerminalTools.
 """
 import datetime
-
+import fnmatch
+import glob
 # File management imports
 import os
 import platform
 import shutil
 import sqlite3
-import fnmatch
-import glob
-
 # DB management imports
 import subprocess
 import webbrowser
-
 # Misc imports
 from urllib.parse import quote
-import requests
-import os
-from flask import Flask, render_template, send_file
 
+import requests
 # WebScraping imports
 from bs4 import BeautifulSoup
 from envhub import get_var
+from flask import Flask, render_template, send_file
 from prettytable import PrettyTable
 
 app = Flask(__name__)
