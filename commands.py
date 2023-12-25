@@ -179,16 +179,11 @@ try:
             """
             funcs.Miscellaneous.coder_search(QUERY)
         
-        def devserver(CMD):
+        def devserver():
             """
             Start a local development served on localhost:8080 with files from the current directory (tt -m dev -h for commands)
-            
-            Commands:
-            - start (Start the server)
-            - stop (Stop the server)
-            
             """
-            funcs.Miscellaneous.devserver(CMD)
+            funcs.Miscellaneous.devserver()
             
 
         def exe():

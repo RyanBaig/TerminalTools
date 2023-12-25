@@ -18,14 +18,15 @@ import webbrowser
 # Misc imports
 from urllib.parse import quote
 import requests
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+import os
+from flask import Flask, render_template, send_file
 
 # WebScraping imports
 from bs4 import BeautifulSoup
 from envhub import get_var
 from prettytable import PrettyTable
 
+app = Flask(__name__)
 
 class Functions:
     """
@@ -475,100 +476,73 @@ class Functions:
     class Miscellaneous:
         @staticmethod
         def coder_search(args):
-            # Get the user's query from the command line.
             try:
                 if args:
-                    query = " ".join(args)  # Concatenate the words in the tuple
-                    
+                    query = " ".join(args)
                     query = query + " site:stackoverflow.com OR site:github.com"
                     query = query.replace("'", '"')
-
-                    # Encode the query for safe transmission over the network.
                     query = quote(query)
-
-                    # Open the Google search results page for the encoded query in a web browser.
                     webbrowser.open(f"https://www.google.com/search?q={query}")
                 else:
                     print("ERROR! Please Make Sure Your Query is Present.")
             except IndexError:
                 print("Indexing Error! Please Make Sure Your Query is Present.")
                 exit()
-        
-        @staticmethod
-        class MyHandler(FileSystemEventHandler):
-            server_process = None  # To store the server process instance
 
-            def start_server(self):
-                current_directory = os.getcwd()
-                self.server_process = subprocess.Popen(["python", "-m", "http.server", "8080"], cwd=current_directory)
-                print(f"Server started at http://localhost:8080. Serving from {current_directory}")
-                
-                print("Watching for changes in the current working directory...")
-
-            def stop_server(self):
-                if self.server_process and self.server_process.poll() is None:
-                    self.server_process.terminate()
-                    self.server_process.wait()
-                    print("Server stopped")
-
-            def restart_server(self):
-                self.stop_server()
-                self.start_server()
-
-            def on_any_event(self, event):
-                if platform.system() == "Windows":
-                    subprocess.Popen(["taskkill", "/f", "/im", "python.exe"])
-                    print("Server stopped")
-                else:
-                    subprocess.Popen(["pkill", "-f", "python -m http.server"])
-                    print("Server stopped")
-
-                self.restart_server()
-
-        @staticmethod
-        def start_watching():
-            # Get the current working directory
+        @app.route('/')
+        def home():
             cwd = os.getcwd()
+            items = os.listdir(cwd)
+            dir_items = []
+            for item in items:
+                if os.path.isfile(item):
+                    icon = True
+                    url = "/file/"
+                elif os.path.isdir(item):
+                    icon = False
+                    url = "/folder/"
+                dir_items.append((item, icon, url))
+            return render_template('home.html', items=dir_items)
 
-            # Set up the watchdog observer
-            observer = Observer()
-            observer.schedule(Functions.Miscellaneous.MyHandler(), path=cwd, recursive=True)
-            observer.start()
-
+        @app.route("/file/<path:filename>")
+        def preview_file(filename):
+            file_path = os.path.join(os.getcwd(), filename)
             try:
-                while True:
-                    # Keep the script running
-                    pass
-            except KeyboardInterrupt:
-                observer.stop()
-            observer.join()
+                return send_file(file_path, as_attachment=False)
+            except Exception as e:
+                return f"Error: {str(e)}"
+
+        @app.route("/folder/<path:filepath>")
+        def preview_folder(filepath):
+            try:
+                full_path = os.path.join(os.getcwd(), filepath)
+                if os.path.isfile(full_path):
+                    return send_file(full_path, as_attachment=False)
+                elif os.path.isdir(full_path):
+                    items = []
+                    for item in os.listdir(full_path):
+                        item_path = os.path.join(filepath, item)
+                        is_dir = os.path.isdir(os.path.join(full_path, item))
+                        items.append((item, item_path, is_dir))
+                    return render_template('folder_preview.html', items=items, current_folder=filepath)
+            except Exception as e:
+                return f"Error: {str(e)}"
+
+        def devserver():
+            cwd = os.getcwd()
+            print(f'Starting server in {cwd}...')
+            app.run(debug=True)
+            webbrowser.open("http://localhost:5000")
 
         @staticmethod
-        def devserver(cmd):
-            # function to open/close a local development server
-            if cmd:
-                if cmd == "start":
-                    handler = Functions.Miscellaneous.MyHandler()
-                    handler.start_server()
-                    webbrowser.open("http://localhost:8080")
-                    Functions.Miscellaneous.start_watching()
-                elif cmd == "stop":
-                    Functions.Miscellaneous.MyHandler().stop_server()
-                else:
-                    print("Invalid command!")
-            else:
-                print("Please provide a command!")
-
-        @staticmethod
-        # self-explanatory
         def exe():
             os.system("./auto-py-to-exe.exe")
             print("Auto-PY-To-EXE dialog box closed and process finished.")
+
     class Git:
         @staticmethod
-        def resolveconflicts():
+        def resolve_conflicts():
             try:
-                # Run 'git diff --name-only --diff-filter=U' to get conflicted files
                 result = subprocess.run(['git', 'diff', '--name-only', '--diff-filter=U'], capture_output=True, text=True, check=True)
                 conflicted_files = result.stdout.splitlines()
 
@@ -578,11 +552,9 @@ class Functions:
 
                 for file in conflicted_files:
                     try:
-                        # Run 'git diff --' to get the diff content for the conflicted file
                         result = subprocess.run(['git', 'diff', '--', file], capture_output=True, text=True, check=True)
                         diff_content = result.stdout
 
-                        # Create a diff file for each conflicted file
                         diff_filename = f"{file}_diff.diff"
                         with open(diff_filename, 'w') as diff_file:
                             diff_file.write(diff_content)
@@ -591,17 +563,16 @@ class Functions:
                     except subprocess.CalledProcessError as e:
                         print(f"Error running Git command: {e}")
 
-                # Ask the user to choose a strategy
                 strategy = input("After reviewing the code, choose a strategy (1 for ours, 2 for theirs): ")
-                
+
                 cmd = int(strategy)
                 if cmd not in [1, 2]:
                     print("Invalid strategy. No changes applied.")
                     return
-                elif cmd == "1":
+                elif cmd == 1:
                     subprocess.run(['git', 'checkout', '--ours', '--', *conflicted_files], check=True)
                     print("Conflicts resolved using 'mine' strategy.")
-                elif cmd == "2":
+                elif cmd == 2:
                     subprocess.run(['git', 'checkout', '--theirs', '--', *conflicted_files], check=True)
                     print("Conflicts resolved using 'theirs' strategy.")
                 else:
