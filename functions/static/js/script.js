@@ -45,7 +45,7 @@ $(document).ready(function () {
   };
 
   // Add the additional keys
-  var additionalKeys = ["changelog", "readme.md", "npm", "config"];
+  var additionalKeys = ["changelog", "readme.md", "npm", "config", "git"];
 
   // Map the additional keys to their respective icons
   additionalKeys.forEach(function (key) {
@@ -53,22 +53,26 @@ $(document).ready(function () {
     iconMapping["readme.md"] = "readme.svg";
     iconMapping["npm"] = "npm.svg";
     iconMapping["config"] = "settings.svg";
+    iconMapping["git"] = "git.svg";
   });
 
   // Add icons to each file
   $("#files li").each(function () {
     var fileName = $(this).text().trim();
-    var isDirectory = $(this).data("is-dir");
 
     // Determine the icon based on whether it's a directory or a file
     var icon;
-    if (!fileName.includes(".")) {
-      // If the file name doesn't contain a dot (.), assume it's a directory
-      icon = "folder.svg";
-    } else {
-      var fileExtension = fileName.split(".").pop();
-      icon = iconMapping[fileExtension] || "file.svg"; // Default to a generic file icon if extension not found
-    }
+    // what is the thing of "but" in avascript? ans: a ternary operator
+    // make it so if the filename doesnt have . but the filename is LICENSE then the icon is file.svg but if the filename doesnt have . and the filename isnt LICENSE then the folder.svg is the icon
+    icon =
+      iconMapping[fileName.split(".").pop()] ||
+      (fileName === "LICENSE"
+        ? "file.svg"
+        : fileName.includes(".") && !iconMapping[fileName.split(".").pop()]
+        ? "file.svg"
+        : "folder.svg");
+
+    
 
     // Set the background image dynamically
     var iconUrl = "http://localhost:5000/static/icons/" + icon;

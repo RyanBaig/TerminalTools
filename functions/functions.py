@@ -579,8 +579,9 @@ class Functions:
         def devserver():
             cwd = os.getcwd()
             print(f'Starting server in {cwd}...')
-            app.run(debug=True)
             webbrowser.open("http://localhost:5000")
+            app.run(debug=True)
+            
 
         @staticmethod
         def exe():
