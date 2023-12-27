@@ -19,10 +19,11 @@ import requests
 # WebScraping imports
 from bs4 import BeautifulSoup
 from envhub import get_var
-from flask import Flask, render_template, send_file
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from prettytable import PrettyTable
 
 app = Flask(__name__)
+app._static_folder = os.path.abspath("static/")
 
 class Functions:
     """
@@ -426,7 +427,7 @@ class Functions:
             soup = BeautifulSoup(html, "html.parser")
 
             if attr:
-                elements = soup.find_all(element, class_=attr)
+                elements = soup.find_all(element, attrs=attr)
             else:
                 elements = soup.find_all(element)
 
@@ -488,41 +489,92 @@ class Functions:
         @app.route('/')
         def home():
             cwd = os.getcwd()
+
+            # Check if there's an index.html file in the current working directory
+            index_html_path = os.path.join(cwd, 'index.html').replace("\\", "/")
+            if os.path.isfile(index_html_path):
+                return redirect(url_for('preview', path='index.html'))
+
+            # If no index.html, proceed with the regular home route
             items = os.listdir(cwd)
             dir_items = []
+            
+            # Get the current URL path
+            current_path = request.path.strip('/')
+
             for item in items:
-                if os.path.isfile(item):
-                    icon = True
-                    url = "/file/"
-                elif os.path.isdir(item):
-                    icon = False
-                    url = "/folder/"
-                dir_items.append((item, icon, url))
-            return render_template('home.html', items=dir_items)
+                item_path = os.path.join(cwd, item).replace("\\", "/")
+                is_dir = os.path.isdir(item_path)
 
-        @app.route("/file/<path:filename>")
-        def preview_file(filename):
-            file_path = os.path.join(os.getcwd(), filename)
+                # Ensure the URL parameter only contains valid characters
+                url_param = item # Adjust this line as needed
+                
+                dir_items.append((item, is_dir, url_param))
+
+            return render_template('home.html', items=dir_items, current_path=current_path)
+
+        @app.route('/static/icons/<path:filename>')
+        def serve_icons(filename):
+            root_dir = os.path.dirname(__file__)
+            path = os.path.join(root_dir, 'static', 'icons') + "\\" +filename
+            return send_file(path)
+
+        @app.route('/static/css/<path:filename>')
+        def serve_css(filename):
+            root_dir = os.path.dirname(__file__)
+            path = os.path.join(root_dir, 'static', 'css') + "\\" +filename
+            return send_file(path)
+
+        @app.route('/static/js/<path:filename>')
+        def serve_js(filename):
+            root_dir = os.path.dirname(__file__)
+            path = os.path.join(root_dir, 'static', 'js') + "\\" +filename
+            return send_file(path)
+
+        @app.route("/<path:path>")
+        def preview(path):
             try:
-                return send_file(file_path, as_attachment=False)
+                    # PATHS
+                    current_path = request.path.split('/')
+                    
+                    breadcrumb = '/ ' + ' / '.join(request.path.split('/')[1:])        
+                    somepath = request.path
+                    if len(current_path) == 2:
+                        prev_path = '/'
+                    else:
+                        prev_path = '/'.join(current_path[:-1])
+
+
+                    
+                    
+                    if prev_path == ['']:
+                        prev_path = '/'
+                    
+                    full_path = os.path.join(os.getcwd(), path).replace("\\", "/")
+
+                    # Check if it's a directory
+                    if os.path.isdir(full_path):
+                        items = []
+                        for item in os.listdir(full_path):
+                            itempath = os.path.join(path, item).replace("\\", "/")
+                            is_dir = os.path.isdir(os.path.join(full_path, item).replace("\\", "/"))
+                            items.append((item, itempath, is_dir))
+
+                        
+                        
+                        return render_template('folder_preview.html', breadcrumb=breadcrumb, somepath=somepath, items=items, current_folder=path, current_path=current_path, prev_path=prev_path)
+                    
+                    # If it's a file, serve it directly
+                    elif os.path.isfile(full_path):
+                        return send_file(full_path, as_attachment=False)
+
             except Exception as e:
+                # Handle errors
+                print(str(e))
                 return f"Error: {str(e)}"
 
-        @app.route("/folder/<path:filepath>")
-        def preview_folder(filepath):
-            try:
-                full_path = os.path.join(os.getcwd(), filepath)
-                if os.path.isfile(full_path):
-                    return send_file(full_path, as_attachment=False)
-                elif os.path.isdir(full_path):
-                    items = []
-                    for item in os.listdir(full_path):
-                        item_path = os.path.join(filepath, item)
-                        is_dir = os.path.isdir(os.path.join(full_path, item))
-                        items.append((item, item_path, is_dir))
-                    return render_template('folder_preview.html', items=items, current_folder=filepath)
-            except Exception as e:
-                return f"Error: {str(e)}"
+            # If the path doesn't correspond to a file or directory, handle accordingly
+            return f"Invalid path: {path}"
 
         def devserver():
             cwd = os.getcwd()
