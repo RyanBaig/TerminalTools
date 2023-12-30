@@ -42,6 +42,9 @@ $(document).ready(function () {
     xlsx: "excel.svg",
     ini: "settings.svg",
     ico: "image.svg",
+    py: "python.svg",
+    venv: "venv.svg",
+    txt: "document.svg",
   };
 
   // Add the additional keys
@@ -71,8 +74,6 @@ $(document).ready(function () {
         : fileName.includes(".") && !iconMapping[fileName.split(".").pop()]
         ? "file.svg"
         : "folder.svg");
-
-    
 
     // Set the background image dynamically
     var iconUrl = "http://localhost:5000/static/icons/" + icon;
