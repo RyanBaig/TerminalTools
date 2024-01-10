@@ -19,7 +19,7 @@ import requests
 # WebScraping imports
 from bs4 import BeautifulSoup
 from envhub import get_var
-from flask import Flask, redirect, render_template, request, send_file, url_for
+from flask import Flask, redirect, render_template, send_file, url_for, request
 from prettytable import PrettyTable
 
 app = Flask(__name__)
@@ -486,6 +486,8 @@ class Functions:
                 print("Indexing Error! Please Make Sure Your Query is Present.")
                 exit()
 
+        
+        
         @app.route('/')
         def home():
             cwd = os.getcwd()
@@ -512,28 +514,11 @@ class Functions:
                 dir_items.append((item, is_dir, url_param))
 
             return render_template('home.html', items=dir_items, current_path=current_path)
-
-        @app.route('/static/icons/<path:filename>')
-        def serve_icons(filename):
-            root_dir = os.path.dirname(__file__)
-            path = os.path.join(root_dir, 'static', 'icons') + "\\" +filename
-            return send_file(path)
-
-        @app.route('/static/css/<path:filename>')
-        def serve_css(filename):
-            root_dir = os.path.dirname(__file__)
-            path = os.path.join(root_dir, 'static', 'css') + "\\" +filename
-            return send_file(path)
-
-        @app.route('/static/js/<path:filename>')
-        def serve_js(filename):
-            root_dir = os.path.dirname(__file__)
-            path = os.path.join(root_dir, 'static', 'js') + "\\" +filename
-            return send_file(path)
+            
 
         @app.route("/<path:path>")
         def preview(path):
-            try:
+            try:    
                     # PATHS
                     current_path = request.path.split('/')
                     
@@ -556,32 +541,67 @@ class Functions:
                     if os.path.isdir(full_path):
                         items = []
                         for item in os.listdir(full_path):
-                            itempath = os.path.join(path, item).replace("\\", "/")
-                            is_dir = os.path.isdir(os.path.join(full_path, item).replace("\\", "/"))
-                            items.append((item, itempath, is_dir))
+                            itempath = os.path.join(full_path, item).replace("\\", "/")
+                            is_dir = os.path.isdir(itempath)
+                            items.append((item, is_dir, itempath))
 
-                        
                         
                         return render_template('folder_preview.html', breadcrumb=breadcrumb, somepath=somepath, items=items, current_folder=path, current_path=current_path, prev_path=prev_path)
                     
                     # If it's a file, serve it directly
                     elif os.path.isfile(full_path):
-                        return send_file(full_path, as_attachment=False)
+                        # if the file is a svg
+                        if full_path.endswith('.svg'):
+                            return send_file(full_path, mimetype='image/svg+xml')
+                        if full_path.endswith('.html'):
+                            return send_file(full_path, mimetype='text/html')
+                        if full_path.endswith('.js'):
+                            return send_file(full_path)
+                        else:
+                            with open(full_path, 'rb') as file:
+                                content = file.read().decode('utf-8')
+                                return render_template('file_preview.html', content=content)
+
 
             except Exception as e:
                 # Handle errors
                 print(str(e))
                 return f"Error: {str(e)}"
 
-            # If the path doesn't correspond to a file or directory, handle accordingly
+                # If the path doesn't correspond to a file or directory, handle accordingly
             return f"Invalid path: {path}"
 
+
+        # ---------- STATIC START ----------
+        @app.route('/static/icons/<path:filename>')
+        def serve_icons(filename):
+            if os.path.isdir(filename):
+                return url_for(Functions.Miscellaneous.preview, path=filename)
+            else:
+                root_dir = os.path.dirname(__file__)
+                path = os.path.join(root_dir, 'static', 'icons') + "\\" +filename
+                return send_file(path)
+
+        @app.route('/static/css/<path:filename>')
+        def serve_css(filename):
+            root_dir = os.path.dirname(__file__)
+            path = os.path.join(root_dir, 'static', 'css') + "\\" +filename
+            return send_file(path)
+
+        @app.route('/static/js/<path:filename>')
+        def serve_js(filename):
+            root_dir = os.path.dirname(__file__)
+            path = os.path.join(root_dir, 'static', 'js') + "\\" +filename
+            return send_file(path)
+        # ---------- STATIC END ----------
+
         def devserver():
+            # Get the current working directory
             cwd = os.getcwd()
             print(f'Starting server in {cwd}...')
-            webbrowser.open("http://localhost:5000")
+
+            # Run the server
             app.run(debug=True)
-            
 
         @staticmethod
         def exe():

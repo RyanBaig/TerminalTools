@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Directory Listing</title>
@@ -431,11 +431,66 @@
         }
     }
 </style>
-<!-- <script src="/js"></script> -->
+<style>
+    /* Customize scrollbar track */
+    .simplebar-track {
+    background: #f0f0f0; /* Set the background color of the track for light mode */
+    }
 
+    /* Customize scrollbar handle */
+    .simplebar-scrollbar {
+    background: #ddd; /* Set the color of the scrollbar handle for light mode */
+    }
+
+    /* Customize scrollbar handle on hover */
+    .simplebar-scrollbar:hover {
+    background: #ccc; /* Set the color of the scrollbar handle on hover for light mode */
+    }
+
+    #navbar-img {
+    margin-left: 10px;
+    margin-right: 3px;
+    }
+
+    /* Hide the default scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+    width: 12px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Set the background color of the track for light mode */
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #ddd; /* Set the color of the scrollbar handle for light mode */
+    border-radius: 6px; /* Set the border radius of the handle */
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #ccc; /* Set the color of the scrollbar handle on hover for light mode */
+    }
+
+    /* Firefox scrollbar */
+    body {
+    scrollbar-color: #ddd #f0f0f0; /* Set the color of the scrollbar for Firefox in light mode */
+    scrollbar-width: thin; /* Set the width of the scrollbar for Firefox */
+    margin-right: 5px;
+    }
+
+</style>
+<!-- <script src="/js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.js"
+    integrity="sha512-HV1U44HR4mYVDcsxzJpghYyGEy2PvbePe9UFXlV3vnzf4yFhbKA9QNpnhy4VWwnaC2jKzijITVWHPZBCOuc51g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.css"
+    integrity="sha512-rptDreZF629VL73El0GaBEH9tlYEKDJFUr+ysb+9whgSGbwYfGGA61dVtQFL0qC8/SZv/EQFW5JtwEFf+8zKYg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body class="simplebar">
 
     <input id="search" type="text" placeholder="Search" autocomplete="off">
     <div id="wrapper">
@@ -444,15 +499,21 @@
                 <a href="/">~</a>
                 /
             </h3>
-            <ul id="files" class="view-tiles">
-                {% for item, is_directory, url_param in items %}
+            <ul id="files" class="view-tiles home-page">
+                {% for item, is_dir, url_param in items %}
                 <li>
-
-                    <a href="{{ url_for('preview', path=url_param) }}" class="icon" title="{{ item }}"><span
-                            class="name">
-                            {{ item }}</span></a>
+                    {% if is_dir %}
+                    <a href="{{ url_for('preview', path=url_param) }}" class="icon folder" title="{{ item }}">
+                        <span class="name">{{ item }}</span>
+                    </a>
+                    {% elif not is_dir %}
+                    <a href="{{ url_for('preview', path=url_param) }}" class="icon file" title="{{ item }}">
+                        <span class="name">{{ item }}</span>
+                    </a>
+                    {% endif %}
                 </li>
                 {% endfor %}
+
             </ul>
         </div>
         <div class="footer">

@@ -7,9 +7,73 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/static/js/script.js"></script>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.js"
+        integrity="sha512-HV1U44HR4mYVDcsxzJpghYyGEy2PvbePe9UFXlV3vnzf4yFhbKA9QNpnhy4VWwnaC2jKzijITVWHPZBCOuc51g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.css"
+        integrity="sha512-rptDreZF629VL73El0GaBEH9tlYEKDJFUr+ysb+9whgSGbwYfGGA61dVtQFL0qC8/SZv/EQFW5JtwEFf+8zKYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Customize scrollbar track */
+        .simplebar-track {
+            background: #f0f0f0;
+            /* Set the background color of the track for light mode */
+        }
+
+        /* Customize scrollbar handle */
+        .simplebar-scrollbar {
+            background: #ddd;
+            /* Set the color of the scrollbar handle for light mode */
+        }
+
+        /* Customize scrollbar handle on hover */
+        .simplebar-scrollbar:hover {
+            background: #ccc;
+            /* Set the color of the scrollbar handle on hover for light mode */
+        }
+
+        #navbar-img {
+            margin-left: 10px;
+            margin-right: 3px;
+        }
+
+        /* Hide the default scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            /* Set the background color of the track for light mode */
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #ddd;
+            /* Set the color of the scrollbar handle for light mode */
+            border-radius: 6px;
+            /* Set the border radius of the handle */
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccc;
+            /* Set the color of the scrollbar handle on hover for light mode */
+        }
+
+        /* Firefox scrollbar */
+        body {
+            scrollbar-color: #ddd #f0f0f0;
+            /* Set the color of the scrollbar for Firefox in light mode */
+            scrollbar-width: thin;
+            /* Set the width of the scrollbar for Firefox */
+            margin-right: 5px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="simplebar">
     <input id="search" type="text" placeholder="Search" autocomplete="off">
 
     <div id="wrapper">
@@ -22,18 +86,21 @@
 
             <ul id="files" class="view-tiles">
                 <li>
-                    <a href="{{ prev_path }}" class=icon title="Go back"><span class="go-back name">
+                    <a href="{{ prev_path }}" class="icon folder" title="Go back"><span class="go-back name">
 
                             Go Back</span></a>
                 </li>
                 {% for item, is_dir, itempath in items %}
                 <li>
-                    <a href="{{ somepath }}/{{ item }}" class="icon" title="{{ item }}">
+                    {% if is_dir %}
+                    <a href="{{ somepath }}/{{ item }}" class="icon folder" title="{{ item }}">
+                        {% elif not is_dir %}
+                        <a href="{{ somepath }}/{{ item }}" class="icon file" title="{{ item }}">
+                            {% endif %}
+                            <span class="name">
 
-                        <span class="name">
-
-                            {{ item }}
-                        </span></a>
+                                {{ item }}
+                            </span></a>
 
                 </li>
                 {% endfor %}
