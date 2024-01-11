@@ -560,7 +560,7 @@ class Functions:
                         else:
                             with open(full_path, 'rb') as file:
                                 content = file.read().decode('utf-8')
-                                return render_template('file_preview.html', content=content)
+                            return render_template('file_preview.html', content=content)
 
 
             except Exception as e:
