@@ -138,9 +138,8 @@ $(document).ready(function () {
     windows: "folder-windows.svg",
     wordpress: "folder-wordpress.svg",
     yarn: "folder-yarn.svg",
+  };
 
-  }
-  
   // Add the additional keys
   var additionalKeys = [
     "changelog",
@@ -173,28 +172,23 @@ $(document).ready(function () {
       fileName.toLowerCase() === "readme"
     ) {
       icon = fileIconMapping["readme"];
-
     } else if (
       fileName.toLowerCase() === "changelog.md" ||
       fileName.toLowerCase() === "changelog"
     ) {
       icon = fileIconMapping["changelog"];
-
     } else if (
       fileName.toLowerCase() === "license.md" ||
       fileName.toLowerCase() === "license"
     ) {
       icon = fileIconMapping["license"];
-
     } else if (isDirectory) {
       icon =
         folderIconMapping[fileName.toLowerCase()] ||
         folderIconMapping["folder"];
-      
     } else if (isFile) {
       var fileExtension = fileName.split(".").pop();
       icon = fileIconMapping[fileExtension] || fileIconMapping["file"];
-      
     } else {
       // Handle cases where neither "folder" nor "file" class is present
       icon = folderIconMapping["folder"];

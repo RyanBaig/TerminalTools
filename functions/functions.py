@@ -19,7 +19,7 @@ import requests
 # WebScraping imports
 from bs4 import BeautifulSoup
 from envhub import get_var
-from flask import Flask, redirect, render_template, send_file, url_for, request
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from prettytable import PrettyTable
 
 app = Flask(__name__)
