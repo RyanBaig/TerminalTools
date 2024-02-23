@@ -608,7 +608,8 @@ class Functions:
 
         @staticmethod
         def exe():
-            exepath = os.path.abspath("./functions/auto-py-to-exe.exe")
+            exepath = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__))
+, "auto-py-to-exe.exe"))
             print(exepath)
             subprocess.Popen([exepath])
             
