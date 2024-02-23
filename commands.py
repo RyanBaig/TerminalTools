@@ -36,7 +36,7 @@ try:
 
             funcs.DBManagement.create_table(DBPATH, TABLENAME, COLUMNS)
 
-        def sqlquery(db):
+        def sqlquery(DB):
             """
             Query an SQLite Database
             """

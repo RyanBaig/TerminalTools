@@ -172,12 +172,12 @@ class Functions:
     class DBManagement:
         @staticmethod
         # Function to send queries to a database
-        def sql_query(db):
-            if db is None:
+        def sql_query(DB):
+            if DB is None:
                 print("Args: --DB <path to db>")
             else:
             
-                query_file = os.path.abspath("old/tools/functions/query.sql")
+                query_file = os.path.abspath("./query.sql")
                 
                 if os.path.exists(db):
                     try:
