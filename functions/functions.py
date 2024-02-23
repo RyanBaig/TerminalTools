@@ -179,7 +179,7 @@ class Functions:
             
                 query_file = os.path.abspath("./query.sql")
                 
-                if os.path.exists(db):
+                if os.path.exists(DB):
                     try:
                         # open the file
                         if platform.system() == 'Windows':
@@ -198,7 +198,7 @@ class Functions:
                             sql_commands = file.read().splitlines()
                             
                         # Establish a connection to your SQLite database
-                        conn = sqlite3.connect(db)
+                        conn = sqlite3.connect(DB)
                         cursor = conn.cursor()
 
                         for cmd in sql_commands:
@@ -221,7 +221,7 @@ class Functions:
                         print(f"An error occurred: {e}")
                 else:
                     print(
-                        f"Error: The database file '{db}' doesn't exist or the file path is incorrect."
+                        f"Error: The database file '{DB}' doesn't exist or the file path is incorrect."
                     )
 
         @staticmethod
