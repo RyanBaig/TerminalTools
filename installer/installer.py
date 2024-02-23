@@ -53,7 +53,7 @@ try:
     root = tk.Tk()
     root.title("TerminalTools Installer")
     root.geometry("500x200")
-    root.iconbitmap("./icon.ico")
+
     
     # Use ttkbootstrap styles
     style = Style(theme='darkly')
