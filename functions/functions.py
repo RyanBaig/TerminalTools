@@ -172,12 +172,15 @@ class Functions:
     class DBManagement:
         @staticmethod
         # Function to send queries to a database
+        
         def sql_query(DB):
             if DB is None:
                 print("Args: --DB <path to db>")
             else:
-            
-                query_file = os.path.abspath("./query.sql")
+                
+                query_file = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__))
+, "query.sql"))
+                print(query_file)
                 
                 if os.path.exists(DB):
                     try:
@@ -217,8 +220,8 @@ class Functions:
                         print("Query file not found.")
                     except sqlite3.Error as e:
                         print(f"SQLite error: {e}")
-                    except Exception as e:
-                        print(f"An error occurred: {e}")
+                    # except Exception as e:
+                    #     print(f"An error occurred: {e}")
                 else:
                     print(
                         f"Error: The database file '{DB}' doesn't exist or the file path is incorrect."

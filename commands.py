@@ -40,7 +40,7 @@ try:
             """
             Query an SQLite Database
             """
-            funcs.DBManagement.sql_query(db)
+            funcs.DBManagement.sql_query(DB)
 
         def displaydb(DBPATH, TABLENAME):
             """
@@ -257,5 +257,5 @@ try:
 
 except KeyboardInterrupt:
     pass
-except Exception as e:
-    print('An Error Occured: ' + str(e))
+# except Exception as e:
+#     print('An Error Occured: ' + str(e))
