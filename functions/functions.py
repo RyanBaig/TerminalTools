@@ -126,7 +126,7 @@ class Functions:
                         print(f"'{source}' does not exist.")
             except Exception as e:
                 print(f"An error occurred: {str(e)}")
-        
+
         # Function to search for files
         @staticmethod
         def search(directory, criteria):
@@ -161,7 +161,7 @@ class Functions:
                                 path = os.path.join(os.getcwd(), "found_files.txt")
                                 for file_path in found_files:
                                     print(file_path)
-                                    
+
                                     with open(path, 'a') as f:
                                         f.write(file_path + '\n')
                                 print(f"Found {len(found_files)} files matching the search pattern and saved to {path}.")
@@ -172,14 +172,12 @@ class Functions:
     class DBManagement:
         @staticmethod
         # Function to send queries to a database
-        
+
         def sql_query(DB):
             if DB is None:
                 print("Args: --DB <path to db>")
             else:
-                
-                query_file = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__))
-, "query.sql"))
+                query_file = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "query.sql"))
                 print(query_file)
                 
                 if os.path.exists(DB):
@@ -195,11 +193,10 @@ class Functions:
                         # Wait for user to press Enter before proceeding
                         input("Press Enter when you have finished editing the query...")
 
-
                         # Read the contents
                         with open(query_file, "r") as file:
                             sql_commands = file.read().splitlines()
-                            
+
                         # Establish a connection to your SQLite database
                         conn = sqlite3.connect(DB)
                         cursor = conn.cursor()
@@ -207,6 +204,12 @@ class Functions:
                         for cmd in sql_commands:
                             # Execute the query
                             cursor.execute(cmd)
+
+                            # If PRAGMA command or SELECT query for table names, fetch and print the results
+                            if cmd.startswith("PRAGMA") or cmd.startswith("SELECT name FROM sqlite_master WHERE type='table'"):
+                                rows = cursor.fetchall()
+                                for row in rows:
+                                    print(row)
 
                         # Commit the changes if necessary
                         conn.commit()
@@ -220,12 +223,10 @@ class Functions:
                         print("Query file not found.")
                     except sqlite3.Error as e:
                         print(f"SQLite error: {e}")
-                    # except Exception as e:
-                    #     print(f"An error occurred: {e}")
+                    except Exception as e:
+                        print(f"An error occurred: {e}")
                 else:
-                    print(
-                        f"Error: The database file '{DB}' doesn't exist or the file path is incorrect."
-                    )
+                    print(f"Error: The database file '{DB}' doesn't exist or the file path is incorrect.")
 
         @staticmethod
         def create_database(db_path, table_name, columns):
@@ -241,7 +242,7 @@ class Functions:
                 input("Are you sure you have provided the columns with the correct format as shown above? Press Enter to continue...")
 
                 db_folder, db_file = os.path.split(db_path)
-                
+
                 if not os.path.exists(db_folder):
                     os.makedirs(db_folder)
 
@@ -257,10 +258,10 @@ class Functions:
                         column_parts = column.split('(')
                         if len(column_parts) < 2:
                             raise ValueError(f"Invalid column format: {column}. Expected format: column_name(data_type)")
-                        
+
                         column_name = column_parts[0].strip()
                         data_type = column_parts[1].split(')')[0].strip()
-                        
+
                         column_def = f"{column_name} {data_type}"
                         column_defs.append(column_def)
 
@@ -292,7 +293,7 @@ class Functions:
                     # Retreive the data
                     cursor.execute(f"SELECT * FROM {table}")  # Get table name
                     data = cursor.fetchall()
-                    
+
                     # Display it
                     table = PrettyTable()
                     table.field_names = [
@@ -300,7 +301,7 @@ class Functions:
                     ]  # Get column names
 
                     for row in data:
-                        
+
                         table.add_row(row)
 
                     print(table)
@@ -314,7 +315,7 @@ class Functions:
         @staticmethod
         # function to create a table in pre-existing database
         def create_table(db_path, table_name, columns):
-            
+
             if db_path is None or table_name is None or columns is None:
                 print("Args: --DBPATH <Database Path Here> --TABLENAME <TableName Here> --COLUMNS <Columns Here>")
             else:
@@ -327,7 +328,7 @@ class Functions:
                         # Establish a connection to the database or create a new one if it doesn't exist
                         conn = sqlite3.connect(db_path)
                         cursor = conn.cursor()
-                        
+
                         # Create the table with specified columns
                         column_defs = []
 
@@ -335,10 +336,10 @@ class Functions:
                             column_parts = column.split('(')
                             if len(column_parts) < 2:
                                 raise ValueError(f"Invalid column format: {column}. Expected format: column_name(data_type)")
-                            
+
                             column_name = column_parts[0].strip()
                             data_type = column_parts[1].split(')')[0].strip()
-                            
+
                             column_def = f"{column_name} {data_type}"
                             column_defs.append(column_def)
 
@@ -366,7 +367,7 @@ class Functions:
             try:
                 if not url.startswith("https://"):
                     better_url = "https://" + url
-                    
+
                 else:
                     better_url = url
                 username = os.path.expanduser("~")
@@ -452,7 +453,7 @@ class Functions:
                     better_url = url
 
                 token = get_var("SHOT_API_TOKEN")
-                
+
                 apiUrl = f"https://api.screenshotone.com/animate?url={better_url}&scenario=scroll&access_key={token}"
                 r = requests.get(apiUrl)
 
@@ -489,8 +490,6 @@ class Functions:
                 print("Indexing Error! Please Make Sure Your Query is Present.")
                 exit()
 
-        
-        
         @app.route('/')
         def home():
             cwd = os.getcwd()
@@ -503,7 +502,7 @@ class Functions:
             # If no index.html, proceed with the regular home route
             items = os.listdir(cwd)
             dir_items = []
-            
+
             # Get the current URL path
             current_path = request.path.strip('/')
 
@@ -513,58 +512,52 @@ class Functions:
 
                 # Ensure the URL parameter only contains valid characters
                 url_param = item # Adjust this line as needed
-                
+
                 dir_items.append((item, is_dir, url_param))
 
             return render_template('home.html', items=dir_items, current_path=current_path)
-            
 
         @app.route("/<path:path>")
         def preview(path):
             try:    
-                    # PATHS
-                    current_path = request.path.split('/')
-                    
-                    breadcrumb = '/ ' + ' / '.join(request.path.split('/')[1:])        
-                    somepath = request.path
-                    if len(current_path) == 2:
-                        prev_path = '/'
+                # PATHS
+                current_path = request.path.split('/')
+
+                breadcrumb = '/ ' + ' / '.join(request.path.split('/')[1:])        
+                somepath = request.path
+                if len(current_path) == 2:
+                    prev_path = '/'
+                else:
+                    prev_path = '/'.join(current_path[:-1])
+
+                if prev_path == ['']:
+                    prev_path = '/'
+
+                full_path = os.path.join(os.getcwd(), path).replace("\\", "/")
+
+                # Check if it's a directory
+                if os.path.isdir(full_path):
+                    items = []
+                    for item in os.listdir(full_path):
+                        itempath = os.path.join(full_path, item).replace("\\", "/")
+                        is_dir = os.path.isdir(itempath)
+                        items.append((item, is_dir, itempath))
+
+                    return render_template('folder_preview.html', breadcrumb=breadcrumb, somepath=somepath, items=items, current_folder=path, current_path=current_path, prev_path=prev_path)
+
+                # If it's a file, serve it directly
+                elif os.path.isfile(full_path):
+                    # if the file is a svg
+                    if full_path.endswith('.svg'):
+                        return send_file(full_path, mimetype='image/svg+xml')
+                    if full_path.endswith('.html'):
+                        return send_file(full_path, mimetype='text/html')
+                    if full_path.endswith('.js'):
+                        return send_file(full_path)
                     else:
-                        prev_path = '/'.join(current_path[:-1])
-
-
-                    
-                    
-                    if prev_path == ['']:
-                        prev_path = '/'
-                    
-                    full_path = os.path.join(os.getcwd(), path).replace("\\", "/")
-
-                    # Check if it's a directory
-                    if os.path.isdir(full_path):
-                        items = []
-                        for item in os.listdir(full_path):
-                            itempath = os.path.join(full_path, item).replace("\\", "/")
-                            is_dir = os.path.isdir(itempath)
-                            items.append((item, is_dir, itempath))
-
-                        
-                        return render_template('folder_preview.html', breadcrumb=breadcrumb, somepath=somepath, items=items, current_folder=path, current_path=current_path, prev_path=prev_path)
-                    
-                    # If it's a file, serve it directly
-                    elif os.path.isfile(full_path):
-                        # if the file is a svg
-                        if full_path.endswith('.svg'):
-                            return send_file(full_path, mimetype='image/svg+xml')
-                        if full_path.endswith('.html'):
-                            return send_file(full_path, mimetype='text/html')
-                        if full_path.endswith('.js'):
-                            return send_file(full_path)
-                        else:
-                            with open(full_path, 'rb') as file:
-                                content = file.read().decode('utf-8')
-                            return render_template('file_preview.html', content=content)
-
+                        with open(full_path, 'rb') as file:
+                            content = file.read().decode('utf-8')
+                        return render_template('file_preview.html', content=content)
 
             except Exception as e:
                 # Handle errors
@@ -573,7 +566,6 @@ class Functions:
 
                 # If the path doesn't correspond to a file or directory, handle accordingly
             return f"Invalid path: {path}"
-
 
         # ---------- STATIC START ----------
         @app.route('/static/icons/<path:filename>')
@@ -612,7 +604,6 @@ class Functions:
 , "auto-py-to-exe.exe"))
             print(exepath)
             subprocess.Popen([exepath])
-            
 
     class Git:
         @staticmethod

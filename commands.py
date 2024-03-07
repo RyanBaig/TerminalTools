@@ -22,9 +22,6 @@ try:
             """
             COLUMNS = COLUMNS.split(',')
 
-            
-            
-            
             funcs.DBManagement.create_database(DBPATH, TABLENAME, COLUMNS)
 
         def createtable(DBPATH, TABLENAME, COLUMNS):
@@ -137,7 +134,7 @@ try:
             Fetch Content of a secure HTTPS Website/Webpage
             """
             funcs.WebScraping.fetch_page_content(URL)
-        
+
         def parse_html(URL, ELEMENT, ATTRIBUTE=None):
             """
             Parse and Search HTML Content of a Website/Webpage
@@ -178,13 +175,12 @@ try:
             Search Google with results from GitHub or StackOverflow Only
             """
             funcs.Miscellaneous.coder_search(QUERY)
-        
+
         def devserver():
             """
             Start a local development served on localhost:8080 with files from the current directory (tt -m dev -h for commands)
             """
             funcs.Miscellaneous.devserver()
-            
 
         def exe():
             """
@@ -210,7 +206,7 @@ try:
         """
         def resolveconflicts():
             funcs.Git.resolveconflicts()
-        
+
         return {
             'resolveconflicts': resolveconflicts
         }
@@ -234,24 +230,22 @@ try:
 
         if len(sys.argv) == 1:
             url = 'https://terminal-tools-docs.ryanbaig.vercel.app'
-            print(f"""
-                
- _____                             _             _            _____           _       ______         ______                  
-|_   _|                           (_)           | |          |_   _|         | |      | ___ \        | ___ \                 
-  | | ___ _ __ _ __ ___  _ __ ___  _ _ __   __ _| |  ______    | | ___   ___ | |___   | |_/ /_   _   | |_/ /   _  __ _ _ __  
-  | |/ _ \ '__| '_ ` _ \| '_ ` _ \| | '_ \ / _` | | |______|   | |/ _ \ / _ \| / __|  | ___ \ | | |  |    / | | |/ _` | '_ \ 
-  | |  __/ |  | | | | | | | | | | | | | | | (_| | |            | | (_) | (_) | \__ \  | |_/ / |_| |  | |\ \ |_| | (_| | | | |
-  \_/\___|_|  |_| |_| |_|_| |_| |_|_|_| |_|\__,_|_|            \_/\___/ \___/|_|___/  \____/ \__, |  \_| \_\__, |\__,_|_| |_|
-                                                                                              __/ |         __/ |            
-                                                                                             |___/         |___/             
-                                    
+            print("""            
+ _____                   _             _            _____           _       ______         ______                  
+|_   _|                 (_)           | |          |_   _|         | |      | ___ \        | ___ \                 
+  | | ___ _ __ _ __ ___  _ _ __   __ _| |  ______    | | ___   ___ | |___   | |_/ /_   _   | |_/ /   _  __ _ _ __  
+  | |/ _ \ '__| '_ ` _ \| | '_ \ / _` | | |______|   | |/ _ \ / _ \| / __|  | ___ \ | | |  |    / | | |/ _` | '_ \ 
+  | |  __/ |  | | | | | | | | | | (_| | |            | | (_) | (_) | \__ \  | |_/ / |_| |  | |\ \ |_| | (_| | | | |
+  \_/\___|_|  |_| |_| |_|_|_| |_|\__,_|_|            \_/\___/ \___/|_|___/  \____/ \__, |  \_| \_\__, |\__,_|_| |_|
+                                                                                    __/ |         __/ |            
+                                                                                   |___/         |___/             
                                     Welcome to Terminal Tools By Ryan!
                             Thank you for using my project! I hope you like it.
                             
-    I recommend you check out the Documentation ({url}) for each module before using it.
-
-        
-            """)
+    I recommend you check out the Documentation ({0}) for each module before using it.""".format(
+                    url
+                )
+            )
         # -------------------- Start the CLI --------------------
         fire.Fire(CLI, name='tt')
 
