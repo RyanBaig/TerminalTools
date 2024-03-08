@@ -179,7 +179,7 @@ class Functions:
             else:
                 query_file = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "query.sql"))
                 print(query_file)
-                
+
                 if os.path.exists(DB):
                     try:
                         # open the file
@@ -555,8 +555,8 @@ class Functions:
                     if full_path.endswith('.js'):
                         return send_file(full_path)
                     else:
-                        with open(full_path, 'rb') as file:
-                            content = file.read().decode('utf-8')
+                        with open(full_path, 'r', encoding="utf-8", errors="ignore") as file:
+                            content = file.read()
                         return render_template('file_preview.html', content=content)
 
             except Exception as e:
@@ -574,19 +574,19 @@ class Functions:
                 return url_for(Functions.Miscellaneous.preview, path=filename)
             else:
                 root_dir = os.path.dirname(__file__)
-                path = os.path.join(root_dir, 'static', 'icons') + "\\" +filename
+                path = os.path.join(root_dir, 'static', 'icons', filename)
                 return send_file(path)
 
         @app.route('/static/css/<path:filename>')
         def serve_css(filename):
             root_dir = os.path.dirname(__file__)
-            path = os.path.join(root_dir, 'static', 'css') + "\\" +filename
+            path = os.path.join(root_dir, "static", "css", filename)
             return send_file(path)
 
         @app.route('/static/js/<path:filename>')
         def serve_js(filename):
             root_dir = os.path.dirname(__file__)
-            path = os.path.join(root_dir, 'static', 'js') + "\\" +filename
+            path = os.path.join(root_dir, 'static', 'js', filename)
             return send_file(path)
         # ---------- STATIC END ----------
 
@@ -597,13 +597,6 @@ class Functions:
 
             # Run the server
             app.run(debug=True)
-
-        @staticmethod
-        def exe():
-            exepath = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__))
-, "auto-py-to-exe.exe"))
-            print(exepath)
-            subprocess.Popen([exepath])
 
     class Git:
         @staticmethod

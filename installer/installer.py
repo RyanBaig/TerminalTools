@@ -42,6 +42,19 @@ def install_terminal_tools():
             # Save the changes to the PATH environment variable
             os.system('setx PATH "{}"'.format(path_env))
 
+        elif platform.system() == "Linux":
+            # Get the current value of PATH
+            directory = install_dir
+            current_path = os.environ.get('PATH', '')
+
+            # Add the directory to PATH if it's not already there
+            if directory not in current_path.split(os.pathsep):
+                os.environ['PATH'] = f"{directory}{os.pathsep}{current_path}"
+
+            # Save the updated PATH in the user's shell configuration file
+            with open(os.path.expanduser('~/.bashrc'), 'a') as file:
+                file.write(f"\n# Added by TerminalTools Installer\nexport PATH={directory}:${{PATH}}\n")
+
         status_label.config(
             text="TerminalTools has been installed and added to the PATH."
         )

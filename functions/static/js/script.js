@@ -38,6 +38,8 @@ $(document).ready(function () {
     prettierc: "prettier.svg",
     py: "python.svg",
     scss: "sass.svg",
+    sh: "console.svg",
+    sql: "database.svg",
     svg: "svg.svg",
     ts: "typescript.svg",
     ttf: "font.svg",
@@ -85,6 +87,7 @@ $(document).ready(function () {
     javascript: "folder-javascript.svg",
     jinja: "folder-jinja.svg",
     job: "folder-job.svg",
+    js: "folder-javascript.svg",
     json: "folder-json.svg",
     lib: "folder-lib.svg",
     log: "folder-log.svg",
@@ -138,6 +141,8 @@ $(document).ready(function () {
     windows: "folder-windows.svg",
     wordpress: "folder-wordpress.svg",
     yarn: "folder-yarn.svg",
+    __pycache__: "folder-python.svg",
+    ".git": "folder-git.svg",
   };
 
   // Add the additional keys
@@ -153,8 +158,8 @@ $(document).ready(function () {
   // Map the additional keys to their respective icons
   additionalKeys.forEach(function (key) {
     fileIconMapping[key] = key + ".svg";
-    fileIconMapping["readme"] = "README" + ".svg";
   });
+  fileIconMapping["readme"] = "readme" + ".svg";
 
   // Add icons to each file
   $("#files li").each(function () {
@@ -167,32 +172,34 @@ $(document).ready(function () {
     var icon;
 
     // Make it so if the file name is README.md or readme, it uses readme.svg icon
-    if (
-      fileName.toLowerCase() === "readme.md" ||
-      fileName.toLowerCase() === "readme"
-    ) {
-      icon = fileIconMapping["readme"];
-    } else if (
-      fileName.toLowerCase() === "changelog.md" ||
-      fileName.toLowerCase() === "changelog"
-    ) {
-      icon = fileIconMapping["changelog"];
-    } else if (
-      fileName.toLowerCase() === "license.md" ||
-      fileName.toLowerCase() === "license"
-    ) {
-      icon = fileIconMapping["license"];
-    } else if (isDirectory) {
-      icon =
-        folderIconMapping[fileName.toLowerCase()] ||
-        folderIconMapping["folder"];
-    } else if (isFile) {
-      var fileExtension = fileName.split(".").pop();
-      icon = fileIconMapping[fileExtension] || fileIconMapping["file"];
-    } else {
-      // Handle cases where neither "folder" nor "file" class is present
-      icon = folderIconMapping["folder"];
+    switch (true) {
+      case fileName.toLowerCase() === "readme.md" ||
+        fileName.toLowerCase() === "readme":
+        icon = fileIconMapping["readme"];
+        break;
+      case fileName.toLowerCase() === "changelog.md" ||
+        fileName.toLowerCase() === "changelog":
+        icon = fileIconMapping["changelog"];
+        break;
+      case fileName.toLowerCase() === "license.md" ||
+        fileName.toLowerCase() === "license":
+        icon = fileIconMapping["license"];
+        break;
+      case isDirectory:
+        icon =
+          folderIconMapping[fileName.toLowerCase()] ||
+          folderIconMapping["folder"];
+        break;
+      case isFile:
+        var fileExtension = fileName.split(".").pop();
+        icon = fileIconMapping[fileExtension] || fileIconMapping["file"];
+        break;
+      default:
+        // Handle cases where neither "folder" nor "file" class is present
+        icon = folderIconMapping["folder"];
+        break;
     }
+
 
     // Set the background image dynamically
     var iconUrl = "http://localhost:5000/static/icons/" + icon;
