@@ -14,6 +14,10 @@
         integrity="sha512-rptDreZF629VL73El0GaBEH9tlYEKDJFUr+ysb+9whgSGbwYfGGA61dVtQFL0qC8/SZv/EQFW5JtwEFf+8zKYg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        #go-back {
+            background-image: url("http://localhost:5000/static/icons/folder-ci.svg");
+        }
+
         /* Customize scrollbar track */
         .simplebar-track {
             background: #f0f0f0;
@@ -86,7 +90,7 @@
 
             <ul id="files" class="view-tiles">
                 <li>
-                    <a href="{{ prev_path }}" class="icon folder" title="Go back"><span class="go-back name">
+                    <a href="{{ prev_path }}" class="icon folder" title="Go back"><span id=go-back class="name">
 
                             Go Back</span></a>
                 </li>

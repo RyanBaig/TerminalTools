@@ -6,6 +6,7 @@ $(document).ready(function () {
     c: "c.svg",
     cc: "cpp.svg",
     cer: "certificate.svg",
+    cfg: "settings.svg",
     cpp: "cpp.svg",
     css: "css.svg",
     db: "database.svg",
@@ -37,6 +38,7 @@ $(document).ready(function () {
     png: "image.svg",
     prettierc: "prettier.svg",
     py: "python.svg",
+    pyc: "python-misc.svg",
     scss: "sass.svg",
     sh: "console.svg",
     sql: "database.svg",
@@ -76,7 +78,6 @@ $(document).ready(function () {
     git: "folder-git.svg",
     github: "folder-github.svg",
     gitlab: "folder-gitlab.svg",
-    "go back": "folder-ci.svg",
     helper: "folder-helper.svg",
     home: "folder-home.svg",
     icons: "folder-images.svg",
@@ -174,16 +175,19 @@ $(document).ready(function () {
     // Make it so if the file name is README.md or readme, it uses readme.svg icon
     switch (true) {
       case fileName.toLowerCase() === "readme.md" ||
-        fileName.toLowerCase() === "readme":
+      fileName.toLowerCase() === "readme":
         icon = fileIconMapping["readme"];
         break;
       case fileName.toLowerCase() === "changelog.md" ||
-        fileName.toLowerCase() === "changelog":
+      fileName.toLowerCase() === "changelog":
         icon = fileIconMapping["changelog"];
         break;
       case fileName.toLowerCase() === "license.md" ||
-        fileName.toLowerCase() === "license":
+      fileName.toLowerCase() === "license":
         icon = fileIconMapping["license"];
+        break;
+      case fileName.toLowerCase() === "config":
+        icon = fileIconMapping["cfg"];
         break;
       case isDirectory:
         icon =
@@ -199,11 +203,18 @@ $(document).ready(function () {
         icon = folderIconMapping["folder"];
         break;
     }
-
-
-    // Set the background image dynamically
-    var iconUrl = "http://localhost:5000/static/icons/" + icon;
-    fileNameElement.css("background-image", 'url("' + iconUrl + '")');
+    
+    // check if the ID of the filename element is "go-back"
+    if (fileNameElement.attr("id")) {
+      fileNameElement.css(
+        "background-image",
+        'url("http://localhost:5000/static/icons/folder-ci.svg");'
+      );
+    } else {
+      // Set the background image dynamically
+      var iconUrl = "http://localhost:5000/static/icons/" + icon;
+      fileNameElement.css("background-image", 'url("' + iconUrl + '")');
+    }
   });
 });
 
